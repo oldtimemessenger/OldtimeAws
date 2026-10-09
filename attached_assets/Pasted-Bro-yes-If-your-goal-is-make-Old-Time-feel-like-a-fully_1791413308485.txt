@@ -1,0 +1,1155 @@
+Bro 😭🔥 yes. If your goal is “make Old Time feel like a fully finished social app”, you should treat TikTok + Instagram as the baseline for interaction depth, then build your own identity on top.
+
+I checked the current feature sets because both apps have changed a lot. TikTok now has things like Repost, Stories, Friends, playlists, watch history, collections/shared collections, Nearby, search-driven comments, etc.   Instagram has also added Reposts, the Friends feed in Reels, Map, Notes, broadcast channels, etc.  
+
+I’m excluding LIVE, exactly like you asked.
+
+🔥 1. HOME / MAIN FEED
+
+Your app needs a real content-feed system, not just cards stacked on a page.
+
+TikTok-style
+
+For You
+
+* Infinite vertical scrolling
+* Full-screen video
+* Tap video = pause/play
+* Swipe up/down = next/previous
+* Double tap = like
+* Long press = additional actions
+* Tap username/avatar = creator profile
+* Tap caption/hashtags = related content
+* Tap sound = sound page
+* Tap comments = comments sheet
+* Tap share = share sheet
+* Follow button
+* Like count
+* Comment count
+* Share count
+* Save/favorite
+* Repost
+* “Not interested”
+* Report
+* Block
+* Mute
+* Add to Favorites/Collection
+* Download where allowed
+* Speed controls
+* Captions
+* Translation where applicable
+
+TikTok also uses a Friends feed and recommendation-driven discovery beyond the normal FYP.  
+
+Instagram-style
+
+Home
+
+* Following content
+* Recommended content
+* Posts
+* Carousels
+* Reels
+* Stories
+* Suggested accounts
+* Sponsored content eventually, if you ever choose that route
+
+Instagram’s Reels experience is fundamentally built around vertical discovery with like/comment/share interactions.  
+
+YOUR VERSION
+
+You already have For You, so I’d build:
+
+For You | Following | Communities
+
+And potentially:
+
+Friends
+
+That gives Old Time its own ecosystem instead of simply cloning Instagram.
+
+⸻
+
+🔥 2. EVERY POST NEEDS A REAL ACTION SYSTEM
+
+This is one of the biggest things I would tell Replit to audit.
+
+Every piece of content should have:
+
+❤️ Like
+
+Tap:
+
+* like
+* animation
+* count updates immediately
+* toggle unlike
+
+Long press / menu:
+
+* who liked
+* notification behavior
+
+💬 Comment
+
+Opening comments should give:
+
+* comments
+* replies
+* likes on comments
+* reply to comment
+* mention users
+* GIF/sticker where supported
+* comment sorting
+* creator comment pin
+* delete own comment
+* report
+* block
+* restrict/mute commenter
+* comment filters
+* keyword filtering
+* comment likes
+* comment notifications
+
+🔄 Repost
+
+This is important.
+
+TikTok has Repost, and Instagram now has Repost for public posts/Reels. Instagram reposts can appear in followers’ feeds and have their own profile area.  
+
+Your version should:
+
+Repost button →
+
+* Repost
+* Add a thought/note
+* Cancel
+
+Then:
+
+Profile → Reposts
+
+And reposts should be credited to the original creator.
+
+⸻
+
+🔥 3. SHARE BUTTON
+
+This should NOT just copy a URL.
+
+Open a bottom sheet:
+
+Share
+
+* Send to friend
+* Send to group
+* Send to community
+* Add to story
+* Copy link
+* Repost
+* Share externally
+* QR/share code
+* More
+
+And show suggested people at the top.
+
+⸻
+
+🔥 4. SAVE / COLLECTIONS
+
+TikTok has Favorites/Collections, and it even introduced Shared Collections, where people can organize saved videos together.  
+
+Your app should have:
+
+Save
+
+Then:
+
+* Saved
+* Create collection
+* Rename collection
+* Delete collection
+* Private collection
+* Shared collection
+* Add/remove content
+* Search saved content
+
+For example:
+
+Fitness
+School
+Funny
+Restaurants
+Music
+Places
+Ideas
+
+That would fit Old Time REALLY well.
+
+⸻
+
+🔥 5. STORIES
+
+You already have Stories.
+
+But make them behave properly:
+
+Story row
+
+* Your story
+* Friends
+* Following
+* Communities
+
+Tap:
+
+Story viewer
+
+* tap right → next
+* tap left → previous
+* hold → pause
+* swipe down → close
+* swipe up → actions/replies
+* reply
+* reaction
+* share
+* mute
+* report
+
+24-hour expiration.
+
+TikTok Stories are also 24-hour photo/video posts with replies and reactions.  
+
+Story creation
+
+Camera:
+
+* photo
+* video
+* text
+* music
+* stickers
+* mentions
+* location
+* hashtags
+* drawing
+* polls
+* questions
+* captions
+* effects
+* privacy/audience
+
+⸻
+
+🔥 6. PROFILE
+
+This is where Instagram is REALLY deep.
+
+Your profile needs:
+
+Header
+
+* Avatar
+* Cover/background
+* Username
+* Display name
+* Bio
+* Links
+* Followers
+* Following
+* Likes/activity if you want
+* Follow button
+* Message button
+* Share profile
+* More menu
+
+Tabs
+
+I’d give Old Time:
+
+Posts | Reels | Stories/Highlights | Communities | Saved/Reposts
+
+Potentially:
+
+Tagged
+
+⸻
+
+🔥 7. PROFILE MENU
+
+Three-dot menu should contain:
+
+* Share profile
+* Copy profile link
+* QR code
+* Notifications
+* Block
+* Restrict
+* Mute
+* Report
+* About this account
+* Search
+* Manage notifications
+* Remove follower
+
+For your own profile:
+
+* Edit profile
+* Settings
+* Creator tools
+* Privacy
+* Account
+* Saved
+* Archive
+* Activity
+* Close Friends
+
+⸻
+
+🔥 8. SEARCH
+
+This is HUGE.
+
+Search shouldn’t only search usernames.
+
+Have tabs:
+
+Top | People | Posts | Reels | Communities | Sounds | Hashtags | Places
+
+Search suggestions.
+
+Recent searches.
+
+Trending searches.
+
+Search history.
+
+Autocomplete.
+
+Then when someone searches:
+
+Miami fitness
+
+You could show:
+
+* people
+* communities
+* posts
+* videos
+* hashtags
+* local content
+
+This would fit your city + interests + community concept extremely well.
+
+⸻
+
+🔥 9. REELS / SHORT VIDEO
+
+Your short-video system should have:
+
+* vertical full-screen viewer
+* For You
+* Following/Friends
+* comments
+* likes
+* repost
+* share
+* save
+* remix/response if you want
+* sound
+* creator
+* captions
+* hashtags
+* related videos
+* follow
+* profile
+* report
+* not interested
+* download if allowed
+
+Instagram’s Reels system has a separate Reels profile area and supports sharing Reels into Stories, Close Friends and DMs.  
+
+⸻
+
+🔥 10. MUSIC / SOUND PAGE
+
+TikTok does this REALLY well.
+
+Tap the sound:
+
+Sound page
+
+* Sound title
+* Artist
+* Use sound
+* Save sound
+* Videos using sound
+* Share sound
+* Favorite
+
+Then:
+
+Use this sound
+
+opens creation.
+
+You should absolutely have this if Old Time is going to be video-heavy.
+
+⸻
+
+🔥 11. DIRECT MESSAGES
+
+Your Messenger side should be much deeper than basic texting.
+
+Conversation
+
+* Text
+* Emoji
+* GIF
+* Stickers
+* Photos
+* Videos
+* Files
+* Voice notes
+* Camera
+* Reply
+* Forward
+* React
+* Edit
+* Delete
+* Copy
+* Pin
+* Star/save
+* Search
+* Mentions
+* Links
+* Contact sharing
+* Location
+* Polls
+
+And your voice notes already fit perfectly here.
+
+Chat header
+
+* Avatar
+* Name
+* Online status
+* Search
+* Voice call
+* Video call
+* Info/settings
+
+No LIVE included.
+
+⸻
+
+🔥 12. MESSAGE LONG-PRESS MENU
+
+This is another thing people notice immediately.
+
+Long press message:
+
+React
+
+❤️ 😂 😮 😢 😡 👍 etc.
+
+Then:
+
+* Reply
+* Forward
+* Copy
+* Save
+* Pin
+* Delete
+* Edit
+* Translate
+* Report
+
+⸻
+
+🔥 13. CHAT INFO
+
+Tap the person’s name/header:
+
+* Media
+* Links
+* Files
+* Search
+* Notifications
+* Wallpaper/theme
+* Disappearing messages
+* Privacy
+* Block
+* Report
+* Shared groups
+* Shared communities
+
+⸻
+
+🔥 14. GROUP CHATS
+
+Need:
+
+* group name
+* group picture
+* description
+* members
+* admins
+* permissions
+* invite link
+* add members
+* remove members
+* mute
+* pinned messages
+* polls
+* shared media
+* search
+* mentions
+* replies
+* reactions
+* group settings
+
+⸻
+
+🔥 15. YOUR COMMUNITY SYSTEM
+
+THIS is where I think Old Time can go beyond both.
+
+Your Community:
+
+Community home
+
+* Cover
+* icon
+* name
+* description
+* member count
+* Join
+* Follow
+* notifications
+* share
+* search
+
+Then:
+
+Posts | Threads | Videos | Chat Rooms | Members | About
+
+And categories:
+
+* Fitness
+* School
+* City
+* Nursing
+* Cybersecurity
+* Music
+* Gaming
+* Cars
+* etc.
+
+People can create:
+
+Public communities
+
+or
+
+Private communities
+
+⸻
+
+🔥 16. COMMUNITY CHAT ROOMS
+
+Different from normal group DM.
+
+Example:
+
+Miami Fitness
+
+Rooms:
+
+🏋️ General
+🥗 Nutrition
+🏃 Running
+💪 Workout plans
+📸 Progress
+🔥 Challenges
+
+People enter and talk.
+
+That’s much closer to a real social ecosystem.
+
+⸻
+
+🔥 17. CLOSE FRIENDS
+
+Instagram’s Close Friends concept should absolutely exist in Old Time.
+
+Allow:
+
+Close Friends
+
+Then content audience:
+
+* Everyone
+* Followers
+* Friends
+* Close Friends
+* Community
+* Only me
+
+And your Story can specifically target Close Friends.
+
+⸻
+
+🔥 18. NOTES / STATUS
+
+Instagram Notes are lightweight text/emoji updates that appear around the inbox and last 24 hours.  
+
+Old Time could have:
+
+Status
+
+Examples:
+
+Driving 🚛
+At the gym
+Studying
+Available
+Busy
+Listening to…
+
+Then allow replies → DM.
+
+⸻
+
+🔥 19. NOTIFICATIONS
+
+Don’t make one generic notification screen.
+
+Categories:
+
+All
+
+Likes
+
+* Someone liked your post
+
+Comments
+
+* Someone commented
+
+Mentions
+
+* @you
+
+Followers
+
+* New follower
+
+Messages
+
+* New DM
+
+Communities
+
+* Community activity
+
+Calls
+
+* Missed call
+
+Stories
+
+* Story interaction
+
+System
+
+* Account/security
+
+Tap notification → take user directly to the relevant thing.
+
+⸻
+
+🔥 20. ACTIVITY CENTER
+
+You need something like:
+
+* Likes
+* Comments
+* Mentions
+* Follows
+* Reposts
+* Saves
+* Story interactions
+* Community activity
+* Search history
+* Watch history
+
+TikTok currently exposes Watch History through its Activity Center.  
+
+⸻
+
+🔥 21. WATCH HISTORY
+
+This is easy to overlook.
+
+User accidentally scrolls past a video.
+
+They should be able to:
+
+Profile → ☰ → Activity → Watch History
+
+Then:
+
+* videos watched
+* dates
+* search
+* clear history
+
+⸻
+
+🔥 22. DISCOVERY
+
+You already have For You.
+
+I’d add:
+
+Discover
+
+* Trending
+* Popular
+* Nearby
+* Communities
+* People
+* Hashtags
+* Sounds
+* Places
+* Topics
+
+TikTok currently has multiple discovery surfaces including Nearby, search, Stories, playlists and more.  
+
+⸻
+
+🔥 23. LOCATION
+
+Instagram now has an opt-in Map integrated around DMs, where people can share their last active location with selected friends and explore location-based content.  
+
+Your Map tab can be WAY better for your concept.
+
+Show:
+
+* friends
+* public posts
+* communities
+* events
+* places
+* local creators
+* local stories
+* city content
+
+But privacy must be opt-in.
+
+⸻
+
+🔥 24. CREATE BUTTON
+
+Your central + needs to be serious.
+
+Tap:
+
+Create
+
+Then:
+
+📸 Post
+🎥 Video
+📖 Story
+📝 Text
+🎵 Sound/video
+👥 Community post
+💬 Thread
+📊 Poll
+
+Camera:
+
+* front/back
+* flash
+* timer
+* speed
+* effects
+* filters
+* zoom
+* photo/video
+* gallery
+* music
+* text
+* stickers
+* captions
+* drawing
+* crop
+* trim
+
+TikTok’s camera tools include things such as flip, speed, video length, timer, flash and zoom.  
+
+⸻
+
+🔥 25. CREATOR TOOLS
+
+For users who create a lot:
+
+* analytics
+* views
+* likes
+* comments
+* shares
+* saves
+* followers
+* audience demographics
+* top posts
+* watch time
+* retention
+* content management
+* drafts
+* scheduled posts
+* moderation
+* comment controls
+
+TikTok currently provides creator tooling through TikTok Studio.  
+
+⸻
+
+🔥 26. CONTENT MODERATION
+
+Your app needs:
+
+Report
+
+Reasons:
+
+* harassment
+* spam
+* nudity
+* violence
+* hate
+* misinformation
+* scams
+* impersonation
+* dangerous content
+* copyright
+
+Then:
+
+Block
+
+Mute
+
+Restrict
+
+Not interested
+
+Hide
+
+Keyword filters
+
+Comment filters
+
+This isn’t optional if you’re building a serious public social network.
+
+⸻
+
+🔥 27. PRIVACY CONTROLS
+
+Settings should cover:
+
+Account
+
+* public/private
+* followers
+* following
+* mentions
+* tags
+* messages
+* comments
+* story replies
+* downloads
+* activity status
+* read receipts
+
+Content
+
+* who can view
+* who can comment
+* who can remix
+* who can repost
+* who can share
+
+Location
+
+* off
+* friends
+* close friends
+* selected people
+
+⸻
+
+🔥 28. SECURITY
+
+* Change password
+* Email
+* Phone
+* 2FA
+* Login activity
+* Devices
+* Sessions
+* Security alerts
+* Download data
+* Delete account
+* Deactivate account
+
+⸻
+
+🔥 29. ARCHIVE
+
+Instagram-style:
+
+Archive
+
+* Posts
+* Stories
+* Reels
+
+So deleting doesn’t necessarily mean destroying.
+
+⸻
+
+🔥 30. DRAFTS
+
+This is HUGE for creators.
+
+Save unfinished:
+
+* posts
+* videos
+* stories
+* threads
+
+Then:
+
+Drafts → Edit → Continue → Publish
+
+⸻
+
+🔥 31. PROFILE QR
+
+Profile:
+
+Share → QR
+
+Generate personal QR.
+
+Scan → profile.
+
+This is a tiny feature but makes an app feel finished.
+
+⸻
+
+🔥 32. FOLLOWING SYSTEM
+
+You need to distinguish:
+
+Follow
+
+Friend
+
+Close Friend
+
+Follower
+
+Potentially:
+
+Community member
+
+Those should not all mean the same thing.
+
+⸻
+
+🔥 33. FRIEND REQUESTS
+
+For private accounts:
+
+Follow → Request
+
+Then:
+
+Accept
+Delete
+Block
+
+For public accounts:
+
+Follow immediately.
+
+⸻
+
+🔥 34. VERIFICATION
+
+Profile badge system:
+
+* Creator verification
+* Business verification
+* Maybe official/public figure
+
+And this fits your existing paid verification idea.
+
+⸻
+
+🔥 35. STORIES + HIGHLIGHTS
+
+Stories disappear after 24h.
+
+But:
+
+Highlights
+
+stay on profile.
+
+Examples:
+
+Miami
+Gym
+Travel
+School
+Family
+
+Tap highlight → story viewer.
+
+⸻
+
+🔥 36. BROADCAST / ANNOUNCEMENT CHANNELS
+
+Instagram has broadcast channels where creators can send followers updates, including text, photos, video, voice notes and polls.  
+
+You could call yours:
+
+Channels
+
+Creator:
+
+* posts announcement
+* followers react
+* polls
+* voice updates
+* photos
+* videos
+
+Followers don’t need a normal group-chat experience.
+
+⸻
+
+🔥 37. THE LITTLE BUTTON BEHAVIORS MATTER
+
+This is the part I REALLY want you to have Replit test.
+
+Every button should have:
+
+Tap
+→ correct action
+
+Long press
+→ secondary action where appropriate
+
+Swipe
+→ expected navigation
+
+Back
+→ returns to correct previous screen
+
+Cancel
+→ doesn’t destroy data
+
+Confirm
+→ confirmation when destructive
+
+Loading
+→ visible state
+
+Success
+→ feedback/toast
+
+Failure
+→ useful error
+
+Offline
+→ graceful behavior
+
+Empty
+→ proper empty state
+
+Permission denied
+→ explains what happened
+
+Network failure
+→ retry
+
+That’s what separates:
+
+“I built an app”
+
+from:
+
+“I built an actual social platform.”
+
+⸻
+
+🧠 AND HERE’S HOW I’D STRUCTURE OLD TIME
+
+Honestly bro, I wouldn’t copy TikTok or Instagram exactly.
+
+I’d make Old Time:
+
+Bottom navigation
+
+Updates | Pace | Map | Chat | Profile
+
+Then:
+
+Updates
+
+For You | Following | Communities
+
+Create
+
+Post | Video | Story | Thread | Community
+
+Chat
+
+DMs | Groups | Channels
+
+Profile
+
+Posts | Videos | Communities | Reposts | Saved
+
+And your special sauce:
+
+Communities
+
+Public + private + city + school + fitness + interests + chat rooms + threads + videos
+
+Close Friends
+
+Built directly into posting.
+
+Slap 👋
+
+Your own interaction system.
+
+Pace
+
+Your activity/lifestyle layer.
+
+Map
+
+Your real-world discovery layer.
+
+That gives you TikTok’s discovery + Instagram’s social graph + Snapchat’s community/friend energy + your Messenger system, without making Old Time feel like a copy.
+
+And importantly, I would give Replit this entire list as a QA checklist and tell it to go screen-by-screen, button-by-button, including every modal, swipe, long press, empty state, error state, permission state, offline state, and navigation path. That’s the level of testing you’re talking about.

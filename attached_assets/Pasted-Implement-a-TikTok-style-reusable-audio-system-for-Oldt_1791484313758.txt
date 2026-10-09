@@ -1,0 +1,55 @@
+Implement a TikTok-style reusable audio system for Oldtimehive.
+
+The goal is to let users create posts/videos using another user’s audio without creating unnecessary copyright risk.
+
+Requirements:
+
+1. Every video/post that contains original audio should have an attached “Sound” object:
+    * sound_id
+    * title
+    * creator_id
+    * original_post_id
+    * audio source/reference
+    * duration
+    * usage_count
+    * created_at
+2. Add a “Use this sound” button on posts/videos containing audio.
+3. When another user taps “Use this sound”:
+    * DO NOT create an independent copy of the original audio file if avoidable.
+    * Create a reference/remix relationship to the original Sound object.
+    * Let the user record/create their own video while using that sound.
+    * Store attribution automatically: “Original sound by @username”.
+    * Link back to the original sound/post.
+4. Every reused sound must automatically preserve attribution and show:
+    “Original sound · @username”
+5. Create a Sound page showing:
+    * Sound title
+    * Original creator
+    * Original video/post
+    * Number of uses
+    * Videos/posts using the sound
+    * “Use this sound” button
+6. If a user uploads audio that they do not own, DO NOT claim that Oldtimehive has licensed it.
+    The uploader must confirm they have the necessary rights/permission to upload and use the audio.
+7. Add reporting functionality:
+    * “Copyright issue”
+    * “I don’t own this audio”
+    * “Unauthorized use”
+    * “Other”
+8. Build the backend so reported audio can be disabled centrally. If a Sound is disabled/taken down, all posts that reference that Sound should automatically stop using that audio or be handled according to the platform’s moderation policy.
+9. Do not download audio from TikTok, Instagram, YouTube, Spotify, Apple Music, or other third-party platforms.
+    Do not build scraping or ripping functionality.
+10. Support original sounds created inside Oldtimehive, including:
+
+* microphone recordings
+* uploaded audio that the uploader has rights to use
+* audio extracted from the user’s own uploaded video
+
+11. Add database relationships so the system knows:
+    original sound → original post → creator → reused posts
+12. Design the UI similar to the familiar short-video “Use this sound” experience, but use Oldtimehive’s own branding and UI.
+
+IMPORTANT:
+This system does NOT magically eliminate copyright liability. The implementation should reduce unnecessary copying and provide attribution, ownership declarations, reporting, takedown controls, and auditability. Do not advertise the feature as “copyright-free.”
+
+Before implementing, inspect the existing post/video/media architecture and integrate this cleanly rather than creating a separate parallel media system.

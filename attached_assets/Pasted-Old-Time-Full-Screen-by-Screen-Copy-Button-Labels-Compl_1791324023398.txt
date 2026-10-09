@@ -1,0 +1,198 @@
+Old Time – Full Screen-by-Screen Copy, Button Labels & Complete Terms
+
+1. Gift Drawer (Live)
+Screen title: Send a Gift
+
+Header: [Recipient photo] [Recipient name] is live
+
+Balance bar: Old Time Coins: 1,250   [Top up]
+Tabs: Popular | New | Classic | Animated | Limited
+Gift grid (example items):
+
+Spark (50 coins)
+Heart Wave (120 coins)
+Golden Star (300 coins)
+Fire Storm (500 coins)
+Crown Drop (1,000 coins)
+Galaxy Burst (2,500 coins)
+
+Each gift shows: name, coin price, short looping preview.
+Bottom controls:
+
+Quantity: [1] [5] [10] [50] [Custom]
+
+☐ Send anonymously
+
+☐ Add a message (optional, 100 characters max)
+Primary button: Send Gift
+
+Secondary button: Cancel
+
+2. Gift Drawer (Offline / Profile or Chat)
+Screen title: Send a Gift
+
+Header: To [Recipient name]
+
+Subtext: They will be notified even if they’re offline
+Same tabs, gift grid, quantity selector, anonymous toggle, and message field as the live version.
+Primary button: Send Gift
+
+Secondary button: Cancel
+
+3. Membership Screen
+Screen title: Old Time Membership
+Status card (if not subscribed):
+
+Unlock unlimited lives and keep 100% of your gifts
+Benefits list:
+
+✓ Unlimited live streaming
+
+✓ Receive 100% of every gift
+
+✓ Blue Badge (if not already verified)
+
+✓ Priority support
+
+✓ Exclusive gift animations & themes
+
+✓ Higher daily gift-sending limits
+Price: $9.99 / month
+Primary button: Subscribe
+
+Secondary button: Restore purchase
+
+Footer link: Terms of Membership
+If already subscribed:
+
+Membership active – renews on [date]
+
+[Manage subscription]
+
+[Cancel membership]
+
+4. Blue Badge / Verification Screen
+Screen title: Blue Badge
+If not verified:
+
+Get the Blue Badge so people know you’re authentic.
+Requirements:
+
+Confirm your identity
+Follow Old Time community guidelines
+Have an active account in good standing
+
+Primary button: Apply for Blue Badge
+
+Secondary button: Learn more
+If verified:
+
+You have the Blue Badge
+
+[Badge appears next to your name everywhere]
+Button: View verification details
+
+5. Gift Activity & Revenue Dashboard
+Screen title: Gift Activity
+Tabs: Received | Sent | Revenue
+Received tab:
+
+List of gifts with sender, gift name, value, date, live/offline tag
+
+Filter: All time | This month | This week
+Sent tab:
+
+Same layout for gifts you sent
+Revenue tab:
+
+This month: $XXX.XX
+
+Lifetime earned: $X,XXX.XX
+
+Current split: 100% (Membership) or 70% (No Membership)
+Button: Withdraw funds
+
+Button: View payout history
+
+6. Settings – Gifts & Membership Section
+Section header: Gifts & Membership
+
+Membership status → [Active / Not subscribed]
+Blue Badge status → [Verified / Not verified]
+Gift receiving preferences
+Allow gifts from anyone
+Allow gifts only from people I follow
+Allow gifts only from Close Circle
+Block all gifts
+
+Gift notifications
+Live gifts
+Offline gifts
+Revenue updates
+
+Anonymous gifts → Allow / Block
+Gift message filter → Manage hidden words
+Live gift animations → On / Off / Reduced motion
+Offline gift privacy → Who can see I received a gift
+Everyone
+Followers
+Close Circle
+Only me
+
+
+
+7. Privacy Settings additions
+Under Who can see your content
+
+Gift activity visibility
+Public
+Followers
+Close Circle
+Only me
+
+
+Under How others can interact with you
+
+Who can send me gifts
+Who can send me gifts while I’m live
+
+
+8. Complete Terms – Gifts, Membership, Live Streaming & Blue Badge
+(Old Time Terms of Service – Section 12)
+12.1 Virtual Gifts and Old Time Coins
+
+Old Time Coins are a virtual currency used only inside the Old Time app. Coins have no cash value outside the platform and cannot be exchanged for real money except through official creator payouts. All purchases of Coins are final and non-refundable except where required by law.
+12.2 Sending and Receiving Gifts
+
+Users may send virtual gifts to other users during live streams or while the recipient is offline. Gifts are delivered instantly and cannot be reversed once sent. Abusive, harassing, or illegal messages attached to gifts may result in account restrictions or permanent suspension.
+12.3 Creator Revenue Share
+
+Creators with an active Old Time Membership receive 100% of the stated value of every gift.
+Creators without an active Membership receive 70% of the stated value. The remaining 30% is retained by Old Time as a platform fee.
+Revenue is calculated after any applicable taxes or payment-processor fees.
+
+12.4 Membership
+
+Old Time Membership is a paid monthly subscription. Benefits include unlimited live streaming, 100% gift revenue, eligibility for the Blue Badge, priority support, exclusive gift animations, and higher sending limits. Membership auto-renews unless cancelled. Cancellation takes effect at the end of the current billing period. No partial refunds are provided.
+12.5 Blue Badge
+
+The Blue Badge indicates a verified account. Verification requires accurate identity information and continued compliance with Old Time community guidelines. Old Time may remove the Blue Badge at any time for violations or false information.
+12.6 Live Streaming
+
+Membership holders may stream without time limits. Non-members are subject to daily live-streaming time limits. All live content must follow community guidelines. Old Time may end or restrict streams that violate the rules.
+12.7 Age Restriction
+
+Users under 18 may not purchase Old Time Coins or send paid gifts.
+12.8 Changes to Pricing and Benefits
+
+Old Time may change gift prices, revenue splits, membership benefits, or subscription pricing with reasonable prior notice. Continued use of the service after the effective date constitutes acceptance of the new terms.
+12.9 Payouts
+
+Eligible creators may request withdrawal of gift revenue subject to minimum thresholds, identity verification, and applicable tax requirements. Processing times and fees are shown in the payout section of the app.
+
+These screens and terms are ready to hand to a designer or developer.
+Would you like me to continue with:
+
+Exact button hierarchy and empty states,
+Full community guidelines section,
+Or the complete Privacy Policy language for gifts and membership?

@@ -1,0 +1,102 @@
+I want Oldtimehive’s real-time communication system built around self-hosted/open WebRTC infrastructure instead of a third-party video provider.
+
+Do NOT use Twilio, Agora, Daily, Vonage, LiveKit Cloud, or any other paid third-party video/voice provider.
+
+I want WebRTC to be the underlying technology for:
+
+* 1-to-1 voice calls
+* 1-to-1 video calls
+* Community video rooms
+* Group voice/video rooms
+* Live rooms where some users are speakers and others are audience members
+* Users joining/leaving rooms dynamically
+* Camera and microphone controls
+* Mute/unmute
+* Camera on/off
+* Speaker requests
+* Host/moderator controls
+* Room chat while people are on video
+* Private calls between two users
+
+IMPORTANT: Do not design this as pure peer-to-peer WebRTC for large rooms.
+
+Build the architecture around an SFU (Selective Forwarding Unit) so the same real-time system can support multiple speakers and potentially large audiences without every participant connecting directly to every other participant.
+
+Use:
+
+WebRTC
++
+our own signaling server
++
+STUN/TURN
++
+a self-hosted SFU/media server
++
+Supabase for persistent application data
+
+Supabase should store things like:
+
+* users
+* profiles
+* communities
+* rooms
+* room metadata
+* permissions
+* moderators
+* participants/presence state where appropriate
+* chat messages
+* room settings
+
+Do NOT automatically upload live camera/microphone streams to Supabase Storage.
+
+Live audio/video should be streamed in real time and discarded when the session ends unless we explicitly add a recording feature later.
+
+If recording is added in the future, make it an explicit optional feature with separate storage.
+
+Design the system so a room can have different roles:
+
+HOST
+SPEAKER
+AUDIENCE
+MODERATOR
+
+For example:
+
+Community Live Room
+Host: 1
+Speakers: multiple
+Audience: many
+Chat: enabled
+
+Private Call
+Participants: 2
+Audience: none
+
+The important goal is to create one reusable Real-Time Room Engine instead of building separate systems for video calls, group calls, and community live rooms.
+
+The architecture should be modular so we can scale the SFU and TURN infrastructure later without rewriting the frontend.
+
+Also make the frontend mobile-first and compatible with modern iOS and Android browsers.
+
+Before implementing anything, inspect the existing Oldtimehive codebase and identify:
+
+1. Current chat architecture
+2. Current authentication/user architecture
+3. Current Supabase setup
+4. Existing live-room code
+5. Existing WebRTC/getUserMedia code
+6. Existing WebSocket/signaling code, if any
+
+Then integrate the real-time system into the existing architecture instead of creating duplicate authentication, user, or room systems.
+
+Do not add unnecessary third-party communication services.
+
+The end goal is:
+
+Oldtimehive
+→ our own signaling
+→ WebRTC
+→ self-hosted SFU/TURN
+→ users
+
+with Supabase handling the persistent application data around the real-time experience.

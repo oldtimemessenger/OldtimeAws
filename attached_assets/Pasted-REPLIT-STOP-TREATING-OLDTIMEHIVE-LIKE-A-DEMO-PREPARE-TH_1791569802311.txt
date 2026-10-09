@@ -1,0 +1,284 @@
+REPLIT: STOP TREATING OLDTIMEHIVE LIKE A DEMO. PREPARE THE ENTIRE APPLICATION FOR REAL USERS.
+
+I need you to take ownership of making Oldtimehive a functional, secure, production-ready social media platform. I do not want another superficial UI update, a list of suggestions, or a report claiming everything works when the features are not actually connected.
+
+AUDIT THE ENTIRE EXISTING REPOSITORY, IDENTIFY WHAT IS BROKEN OR INCOMPLETE, AND IMPLEMENT THE NECESSARY FIXES.
+
+IMPORTANT: Preserve our existing design, features, branding, and working functionality. Do not start over or remove features just to make the audit easier.
+
+PHASE 1: FULL APPLICATION AUDIT
+
+Inspect the entire repository, including:
+
+* Frontend and navigation.
+* Authentication and account management.
+* Backend APIs and database connections.
+* User profiles and account settings.
+* Following, followers, and friend relationships.
+* Feed, For You, Following, and content discovery.
+* Posts, photos, videos, uploads, and editing tools.
+* Comments, likes, saves, sharing, and reposting.
+* Stories and temporary content.
+* Direct messaging and notifications.
+* Communities, groups, and other social features.
+* Creator accounts, verification badges, and monetization.
+* Administrative and moderation functionality.
+* Mobile responsiveness and accessibility.
+* Security, performance, error handling, and deployment.
+
+For every feature, determine whether it is:
+
+1. Fully implemented and working.
+2. Implemented but not connected to a real backend.
+3. Partially implemented.
+4. Simulated or using mock data.
+5. Broken.
+6. Missing.
+
+Do not mark a feature production-ready simply because its screen renders or a button responds to a click.
+
+PHASE 2: REAL AUTHENTICATION AND USER ACCOUNTS
+
+Prepare the application for real users using our intended AWS-first architecture.
+
+* Configure AWS Cognito as the primary authentication provider if it is not already connected.
+* Implement real registration, login, logout, session persistence, email verification where appropriate, and password recovery.
+* Ensure users can access only their own private account information.
+* Enforce authorization on the backend.
+* Ensure protected pages and APIs reject unauthorized requests.
+* Handle expired sessions, invalid credentials, duplicate registrations, network failures, and account deletion correctly.
+* Never expose private credentials or privileged API keys in frontend code.
+* Do not introduce unnecessary Apple or Google login integrations just because you assume they are required for store approval.
+
+Inspect the current authentication implementation before modifying it. Do not replace a working system without explaining why.
+
+PHASE 3: DATABASE AND REAL DATA
+
+Real users must be able to interact with each other.
+
+* Connect every required feature to the actual production database and backend.
+* Remove mock data from production flows.
+* Persist account changes, posts, comments, reactions, follows, relationships, and other supported features.
+* Ensure data belongs to the correct user and is not accidentally shared with unauthorized users.
+* Add appropriate database constraints, indexes, validation, and migrations.
+* Handle duplicate requests and concurrent updates safely.
+* Provide loading, empty, success, and error states.
+* Ensure refreshing the page or signing in again does not unexpectedly erase persistent user data.
+
+Do not assume a database is configured simply because its environment variables exist.
+
+Inspect the existing AWS setup before selecting or provisioning additional services. Do not create duplicate databases or infrastructure unnecessarily.
+
+PHASE 4: SOCIAL FEATURES MUST ACTUALLY WORK
+
+Test the entire user journey between multiple independent accounts.
+
+For example:
+
+* User A creates an account.
+* User A completes a profile.
+* User B creates a separate account.
+* User A follows User B.
+* User B publishes a post.
+* User A can discover and interact with that post according to the applicable visibility settings.
+* Likes, comments, saves, and follow relationships persist correctly.
+* Private accounts and restricted content remain private.
+* Blocking and reporting work correctly.
+* Notifications correspond to real events rather than fabricated activity.
+
+Apply the same standard to messaging, stories, communities, groups, media uploads, and other implemented features.
+
+If a feature requires an external service that is not configured, identify the missing dependency and implement the appropriate integration only when it can be completed safely. Do not fake successful functionality.
+
+PHASE 5: MEDIA, CAMERA, AND CONTENT CREATION
+
+Our content creation experience is a major part of Oldtimehive.
+
+Inspect and test:
+
+* Camera permissions and capture.
+* Photo and video uploads.
+* Media previews.
+* Text placement and editing tools.
+* Emojis, overlays, and other implemented editing features.
+* Cropping, positioning, scaling, and touch gestures.
+* Upload progress and failure recovery.
+* Media validation and file-size limits.
+* Storage permissions and secure media delivery.
+* Mobile browser compatibility.
+
+Preserve the existing creative tools and visual quality.
+
+Use appropriate production media storage and delivery infrastructure. If AWS S3 or another service is already configured, inspect and reuse it where appropriate.
+
+Do not expose storage credentials or allow users to overwrite or access other users’ private files.
+
+PHASE 6: SECURITY AND PRIVACY
+
+Perform a serious production security review.
+
+Check:
+
+* Authentication and authorization.
+* Broken access controls.
+* Cross-account data leakage.
+* Input validation and output encoding.
+* Cross-site scripting and injection risks.
+* Cross-site request forgery where applicable.
+* Rate limiting and abuse prevention.
+* Secure session and cookie configuration.
+* File-upload security.
+* API permissions.
+* Database access policies.
+* Secret management.
+* Error messages that expose sensitive information.
+* Dependency vulnerabilities.
+* Administrative access controls.
+
+Ensure public, private, and restricted content follows the intended access rules.
+
+Never trust a user ID, account type, verification status, subscription status, or payment amount supplied by the client without validating it on the server.
+
+Do not expose sensitive stack traces or internal infrastructure details to users.
+
+PHASE 7: USER SAFETY AND STORE READINESS
+
+Prepare the platform for real people, not just successful development tests.
+
+Implement or verify the applicable requirements for:
+
+* Reporting content and accounts.
+* Blocking users.
+* Moderation and abuse handling.
+* Community safety.
+* Privacy disclosures.
+* Account deletion.
+* Age-related restrictions and appropriate protections.
+* Terms of service and community guidelines.
+* User-generated content moderation.
+* Support and contact information.
+
+Review the current Apple App Store and Google Play policies where relevant.
+
+Do not claim that the app is approved or guaranteed to pass review. Identify remaining compliance gaps honestly.
+
+PHASE 8: MONETIZATION READINESS
+
+Our business model includes paid verification, subscriptions, creator features, digital purchases, and potentially creator payouts.
+
+Prepare the architecture so these can be implemented securely.
+
+* Verify paid entitlements on the backend.
+* Never grant a paid badge because a frontend variable says the user paid.
+* Protect subscription and transaction records.
+* Prevent duplicate processing of payment events.
+* Handle refunds, cancellations, and expired subscriptions.
+* Keep creator earnings and transaction records consistent.
+* Verify the applicable Apple and Google billing rules before implementing purchases inside their mobile apps.
+* Do not assume Stripe is required for every payment flow.
+* Do not assume Apple or Google will handle all creator payouts.
+* Do not activate real charges or payouts without the required configuration and safeguards.
+
+If payment infrastructure is not ready, prepare the integration points without pretending transactions are operational.
+
+PHASE 9: PERFORMANCE AND RELIABILITY
+
+Optimize the app for real users on ordinary phones and unreliable mobile connections.
+
+* Fix slow pages and unnecessary network requests.
+* Add pagination or appropriate incremental loading for large feeds and lists.
+* Avoid loading every user’s content at once.
+* Optimize image and video delivery.
+* Prevent duplicate submissions.
+* Handle timeouts and temporary service failures.
+* Prevent accidental loss of unsaved edits.
+* Add useful server-side logging and error monitoring.
+* Ensure secrets and personal data are not written into logs.
+* Add appropriate health checks.
+* Verify production builds and deployment configuration.
+* Make sure the app behaves correctly on mobile screen sizes and supported browsers.
+
+Do not introduce expensive infrastructure without explaining the expected benefit and cost.
+
+PHASE 10: AWS AND DEPLOYMENT
+
+AWS is our intended infrastructure direction.
+
+* Inspect the existing AWS account configuration and repository dependencies.
+* Identify the actual services already configured.
+* Verify environment variable names and deployment settings.
+* Separate development, testing, and production configurations.
+* Ensure production secrets are stored securely.
+* Check domain, HTTPS, CORS, authentication callback, and API configuration where applicable.
+* Make sure the application can be deployed independently of Replit.
+* Identify any remaining Replit-specific dependencies.
+* Do not delete existing infrastructure or migrate production data without authorization.
+* Do not print secrets into logs, reports, commits, or chat responses.
+
+Do not claim AWS migration is complete until the application has actually been configured and tested against the intended AWS environment.
+
+PHASE 11: TEST THE APP LIKE A REAL CUSTOMER
+
+Create and execute a production-readiness test plan.
+
+At minimum, test:
+
+1. New user registration.
+2. Existing user login.
+3. Invalid credentials.
+4. Password recovery.
+5. Logout and session expiration.
+6. Profile creation and editing.
+7. Two separate users interacting.
+8. Post creation and media upload.
+9. Feed refresh and pagination.
+10. Likes, comments, follows, and other implemented interactions.
+11. Private content and account permissions.
+12. Reporting and blocking.
+13. Messaging and notifications, where implemented.
+14. Mobile responsiveness.
+15. Backend failure and network interruption.
+16. Account deletion.
+17. Production build and deployment configuration.
+
+Use automated tests where practical and real integration tests for critical backend functionality.
+
+Do not fabricate test results. Clearly distinguish automated tests, manual tests, untested features, and tests that failed.
+
+PHASE 12: EXECUTION AND REPORTING
+
+Do not stop after producing an audit report.
+
+Follow this sequence:
+
+1. Inspect the current repository and identify critical blockers.
+2. Fix critical security and data-integrity issues first.
+3. Connect and repair existing core functionality.
+4. Implement missing production safeguards.
+5. Run relevant tests after each significant change.
+6. Fix the failures that can be resolved safely.
+7. Repeat the tests and document the results.
+8. Prepare a clear list of anything requiring my intervention.
+
+Work in manageable changes and preserve the ability to roll back. Do not make destructive database or infrastructure changes without approval.
+
+At the end, provide a report with:
+
+* Features verified as working.
+* Features repaired.
+* Features still incomplete.
+* Security issues found and resolved.
+* Tests actually executed and their results.
+* AWS configuration still required.
+* External services or credentials still required.
+* Remaining App Store and Google Play compliance concerns.
+* Deployment steps required before launch.
+* Any expected ongoing infrastructure costs.
+
+FINAL REQUIREMENT:
+
+I want a working application that real users can register for, use, and interact with safely. I do not want an attractive frontend that merely looks finished.
+
+Be honest about what is and is not operational. Prioritize making the existing application genuinely functional rather than continuously adding new features.
+
+Begin by inspecting the repository and identifying the five most serious blockers preventing real users from using Oldtimehive reliably. Then fix them in order of risk and importance.

@@ -1,0 +1,220 @@
+Bro 😭 I actually think you can make this way cleaner than TikTok Duet if you stop thinking of it as “two videos side-by-side” and instead build it like a Remix Studio.
+
+The key is: the original creator becomes a movable visual layer, and the person remixing controls where/how that layer appears.
+
+The Remix Studio
+
+When you tap Remix, open a full-screen editor with the original video already loaded.
+
+Instead of locking the layout:
+
+1. Split
+
+* Original video on left/right.
+* Drag the divider anywhere.
+* 30/70, 50/50, 70/30, etc.
+* Both videos stay perfectly framed.
+
+2. Floating
+
+* Original creator becomes a movable/resizable video window.
+* Drag them anywhere.
+* Pinch to resize.
+* Rotate slightly if you want.
+* Snap guides appear when they’re centered/aligned.
+
+3. Background
+This is the 🔥 one you’re describing.
+
+The original person becomes the background video, almost like a Zoom/FaceTime presentation.
+
+Example:
+
+Original creator fills the screen
+You appear in a clean foreground window
+
+But you should have automatic subject separation so your camera feed can appear in front of the original video without looking like a rectangle.
+
+Basically:
+
+┌───────────────────────────┐
+│                           │
+│    ORIGINAL CREATOR       │
+│                           │
+│         🎥                │
+│                           │
+│              ┌─────────┐  │
+│              │   YOU   │  │
+│              │         │  │
+│              └─────────┘  │
+└───────────────────────────┘
+
+And the user can drag YOU anywhere.
+
+4. Picture-in-picture
+
+Original video stays full screen.
+
+Your camera becomes a floating bubble/card.
+
+Give it professional snapping:
+
+* top-left
+* top-center
+* top-right
+* center-left
+* center
+* center-right
+* bottom-left
+* bottom-center
+* bottom-right
+
+But don’t make it look like a cheap FaceTime bubble.
+
+Give the creator control over:
+
+Shape
+
+* rectangle
+* rounded rectangle
+* circle
+* vertical card
+* custom crop
+
+Border
+
+* none
+* thin
+* soft glow
+* creator-style frame
+
+Size
+
+* small
+* medium
+* large
+* custom
+
+5. React
+
+This could be your version of TikTok’s Duet reaction.
+
+Original video plays normally.
+
+Your camera appears as a foreground reaction layer.
+
+But here’s where you can get crazy:
+
+You could let the creator choose:
+
+“Behind Me”
+
+and automatically place the original video behind their body.
+
+That gives you:
+
+original video → background
+user’s body → foreground
+
+That’s much more visually impressive than standard Duet.
+
+⸻
+
+The thing I’d REALLY build
+
+I’d make Remix use a layer-based compositor.
+
+Think Photoshop/CapCut, but ridiculously simplified.
+
+REMIX
+────────────────────
+[ ORIGINAL VIDEO ]  ← layer 1
+[ YOUR CAMERA ]     ← layer 2
+[ TEXT ]            ← layer 3
+[ STICKER ]         ← layer 4
+[ EFFECT ]          ← layer 5
+
+The user doesn’t need to understand layers.
+
+They just see:
+
+Original
+Me
+Layout
+Background
+Effects
+
+and everything updates live.
+
+⸻
+
+Make the transition itself feel premium
+
+When they tap Remix:
+
+Don’t immediately throw them into an ugly editor.
+
+Animate the original video into the Remix canvas.
+
+Something like:
+
+Original video expands → gently shifts left → camera preview appears → controls fade in.
+
+Then:
+
+LAYOUT
+
+Split       Floating
+   ▣           ◉
+Background    PiP
+   ◉           ▣
+
+Tap one and the composition smoothly morphs.
+
+That makes the whole thing feel like a real creative tool rather than “TikTok copied.”
+
+⸻
+
+And here’s the killer feature
+
+Freeform Remix
+
+Don’t force the user to choose a preset.
+
+They can literally grab the original video with their finger and move it.
+
+For example:
+
+Original creator starts full-screen.
+
+User drags them:
+
+      ┌───────────────┐
+      │               │
+      │   ORIGINAL    │
+      │               │
+      │          ┌────┤
+      │          │YOU │
+      └──────────┴────┘
+
+Then pinch the original smaller.
+
+Then move themselves.
+
+Then record.
+
+The layout becomes part of the video composition.
+
+That’s the difference between:
+
+TikTok Duet:
+“Pick a layout.”
+
+vs.
+
+Old Time Remix:
+“Build the scene.”
+
+🔥
+
+And I’d absolutely make Remix a first-class creation mode in Old Time rather than another little button buried inside the share menu.

@@ -1,0 +1,232 @@
+BRO, STOP AND REWORK THE CURRENT REMIX COMPOSITION LOGIC.
+
+The current Remix implementation is NOT matching the product concept.
+
+The idea is NOT simply:
+“original video + my video side by side.”
+
+The idea is:
+
+I am responding to the content by appearing ON / INSIDE the content I’m talking about.
+
+Think professional video compositing, not TikTok Duet.
+
+IMPORTANT:
+Do NOT throw away the existing Remix system. Inspect what is already implemented and correct the composition/rendering pipeline.
+
+THE CORE EXPERIENCE
+
+When I tap Remix on someone’s content:
+
+The original content becomes the main visual environment.
+
+My camera becomes a foreground subject that can be placed over that content.
+
+For example:
+
+ORIGINAL VIDEO
+fills the screen
+
+                ┌──────────┐
+                │   ME     │
+                │ talking  │
+                └──────────┘
+
+I can move myself around the original content.
+
+I should be able to say:
+
+“Look at THIS part…”
+
+while my video is visually sitting on top of the content I’m talking about.
+
+DEFAULT REMIX
+
+Default mode should NOT be a 50/50 split.
+
+Default should be:
+
+Original content = background/main canvas
+My camera = foreground layer
+
+My camera should be a clean, movable subject/window.
+
+SUBJECT MODE
+
+This is critical.
+
+My camera feed should support background removal / subject segmentation.
+
+When background removal is enabled:
+
+Do NOT show me as a rectangular video box.
+
+Instead:
+
+ORIGINAL CONTENT
+↓
+┌─────────────────────────────┐
+│                             │
+│      original content       │
+│                             │
+│            👤               │
+│          ME                 │
+│                             │
+└─────────────────────────────┘
+
+Only my actual body/person should appear.
+
+The original content should remain visible around me.
+
+MOVEMENT
+
+I should be able to:
+
+* drag myself anywhere
+* pinch to resize
+* reposition myself
+* rotate slightly
+* place myself over a specific part of the original video
+* move myself away from important content
+* quickly snap to useful positions
+
+The original video remains underneath.
+
+“POINT AT IT” EXPERIENCE
+
+This is the important creative behavior.
+
+If someone is talking about something happening in the original video, they should be able to position themselves next to it or directly over it.
+
+Example:
+
+Original video shows a car.
+
+I can position myself beside the car and say:
+
+“Look at this car right here.”
+
+It should visually feel like I’m PRESENT in the content.
+
+LAYOUT MODES
+
+Keep multiple modes, but make the default concept clear:
+
+1. OVERLAY
+    My camera is layered over the original content.
+2. CUTOUT
+    My background is removed and only my person remains.
+3. FLOATING
+    My full camera feed becomes a movable window.
+4. SPLIT
+    Traditional side-by-side layout.
+5. BACKGROUND
+    Original content fills the scene while I appear in the foreground.
+
+The user should be able to switch between these modes without leaving Remix.
+
+PROFESSIONAL EDGE QUALITY
+
+For CUTOUT/BACKGROUND mode:
+
+The current subject extraction looks like a sticker.
+
+Fix the actual alpha matte.
+
+Do NOT fake this with:
+
+* CSS blur
+* drop shadows
+* outlines
+* thick feathering
+* glowing borders
+
+Use proper alpha-mask refinement.
+
+The edge should have:
+
+* natural feathering
+* fine hair preservation
+* clean fingers/hands
+* clean clothing contours
+* no white halo
+* no dark halo
+* no color contamination
+* no jagged edges
+* no obvious AI cutout boundary
+
+Keep the inside of the subject sharp.
+
+Only refine the boundary.
+
+TEMPORAL VIDEO QUALITY
+
+This is video, so the mask must remain stable.
+
+Prevent:
+
+* edge flickering
+* mask crawling
+* hair shimmering
+* contour expansion/contraction
+* visible frame-to-frame mask changes
+
+Use temporal stabilization/tracking where appropriate.
+
+COMPOSITING
+
+The final composition should look like:
+
+ORIGINAL CONTENT
++
+MY REAL PRESENCE
+
+Not:
+
+VIDEO A
+beside
+VIDEO B
+
+The viewer should immediately understand:
+
+“I’m watching this person’s reaction/commentary INSIDE the content they’re responding to.”
+
+IMPORTANT PRODUCT RULE
+
+Do NOT make the user manually configure complicated technical settings.
+
+The system should automatically produce a professional default composition.
+
+The user should only need to:
+
+1. Tap Remix
+2. Camera opens
+3. Their subject appears over the original content
+4. Drag/resize themselves
+5. Record
+
+Everything else should be automatic.
+
+VISUAL QUALITY TARGET
+
+The result should feel closer to:
+
+professional Photoshop-style compositing
++
+CapCut-level video editing
++
+Zoom/FaceTime-style presence
+
+but with a much cleaner and simpler social-media workflow.
+
+Do NOT copy TikTok Duet’s fixed composition.
+
+Our differentiator is:
+
+“Don’t just duet the content. Step into it.”
+
+Before modifying anything, inspect the current Remix implementation and identify exactly why the current output is behaving like a normal two-video composition.
+
+Fix the rendering/compositing architecture so the ORIGINAL CONTENT is the scene and MY VIDEO is the subject being composited into that scene.
+
+Do not just change the UI labels. The actual rendered output must change.

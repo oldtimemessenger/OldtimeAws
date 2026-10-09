@@ -1,0 +1,39 @@
+modules = ["nodejs-24", "python-base-3.13", "postgresql-16"]
+
+[deployment]
+router = "application"
+deploymentTarget = "autoscale"
+
+[deployment.postBuild]
+args = ["pnpm", "store", "prune"]
+env = { "CI" = "true" }
+
+[workflows]
+runButton = "Project"
+
+[agent]
+stack = "PNPM_WORKSPACE"
+expertMode = true
+
+[postMerge]
+path = "scripts/post-merge.sh"
+timeoutMs = 20000
+
+[nix]
+channel = "stable-25_05"
+
+[userenv]
+
+[userenv.production]
+PUBLIC_APP_URL = "https://oldtimehive-app-1.replit.app"
+STRIPE_PRICE_TIER_1 = "price_1UOU8KCkG2dUJwuxw6uCpgWY"
+STRIPE_PRICE_TIER_2 = "price_1UOU8LCkG2dUJwux2LnaBod6"
+STRIPE_PRICE_TIER_3 = "price_1UOU8LCkG2dUJwuxnAX4Iw5V"
+STRIPE_CONNECT_COUNTRY = "US"
+
+[userenv.development]
+COGNITO_DOMAIN = "https://us-east-2lipojnz2w.auth.us-east-2.amazoncognito.com"
+COGNITO_ENABLED = "false"
+COGNITO_REDIRECT_URIS = "https://f39e9284-f551-4d3d-b774-795710340230-00-y7f27saism07.janeway.replit.dev/"
+COGNITO_REGION = "us-east-2"
+COGNITO_USER_POOL_ID = "us-east-2_LIPojnZ2W"

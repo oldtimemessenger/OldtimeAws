@@ -1,0 +1,126 @@
+The Remix system is already working. DO NOT rebuild the remix architecture or remove the existing functionality.
+
+I want you to focus specifically on improving the subject cutout/compositing quality so it looks like professional Photoshop/CapCut-level masking instead of an obvious AI cutout.
+
+The current problem is that the subject contour looks too harsh and artificial. The person looks pasted on top of the background.
+
+Improve the compositing pipeline around the existing foreground segmentation/mask:
+
+1. REFINE THE ALPHA MATTE
+
+* Do not use a simple hard binary mask.
+* Generate a soft alpha transition around the subject boundary.
+* Use edge-aware feathering rather than globally blurring the entire mask.
+* Preserve sharp edges around important areas such as eyes, eyebrows, facial features, hands, fingers, clothing edges, and hair structure.
+* Avoid the obvious “glowing halo” effect.
+* Avoid excessive feathering that makes the person look blurry.
+
+2. EDGE COLOR / DECONTAMINATION
+    The biggest goal is making the subject visually belong to the background.
+
+Implement edge decontamination/color spill reduction where possible.
+For pixels near the boundary, reduce background-colored contamination that remains from the original background.
+
+Example:
+If the original background is blue and the person’s hair/clothing has a blue fringe, reduce that blue contamination around the edge.
+
+Do NOT simply outline the person.
+
+3. SUB-PIXEL EDGE REFINEMENT
+    Treat the mask as a continuous alpha matte rather than a yes/no mask.
+
+Use:
+
+* edge-aware smoothing
+* sub-pixel alpha refinement
+* controlled erosion/dilation
+* localized feathering
+* fine contour cleanup
+
+The goal is a natural transition of approximately 1–3 pixels depending on output resolution, while preserving fine detail.
+
+4. HAIR AND FINE DETAILS
+    Hair is extremely important.
+
+Do not create a generic smooth contour around hair.
+Preserve natural hair strands and small gaps where the segmentation system can confidently detect them.
+
+Avoid:
+
+* plastic-looking hair
+* chunky hair silhouettes
+* white/black halos
+* obvious cutout borders
+
+5. BODY/CLOTHING EDGES
+    Clothing should remain crisp.
+
+Do not blur the entire person to hide bad edges.
+
+The interior of the subject should remain sharp while only the boundary receives localized refinement.
+
+6. TEMPORAL STABILITY
+    Because this is VIDEO, the edge must remain stable frame-to-frame.
+
+Prevent:
+
+* shimmering edges
+* crawling masks
+* flickering hair
+* changing contour thickness
+* mask expansion/contraction between frames
+
+Use temporal smoothing/tracking where appropriate, but do not smear fast movement.
+
+7. DIFFERENT BACKGROUNDS
+    The compositor needs to work whether the original/background is:
+
+* bright
+* dark
+* colorful
+* highly detailed
+* similar in color to the subject
+
+Do not hardcode a specific background color.
+
+8. COMPOSITING
+    After generating the refined alpha matte, composite the subject naturally into the destination scene.
+
+The final result should feel like the subject was actually filmed inside the scene, not cut out and pasted over it.
+
+Use subtle edge integration where appropriate, but keep it extremely restrained.
+
+9. PERFORMANCE
+    Keep this optimized for mobile browsers.
+
+Do not introduce an expensive per-frame operation that makes recording unusable.
+
+Use GPU/WebGL/WebGPU/canvas acceleration where appropriate and reuse existing video processing infrastructure.
+
+10. IMPORTANT UI REQUIREMENT
+    Do not expose technical controls to normal users.
+
+The user should simply see a polished result.
+
+Keep the existing Remix Studio UI and controls.
+
+SUCCESS CRITERIA:
+
+Take the exact same Remix video and compare the current output against the improved output.
+
+The improved version should have:
+
+* cleaner hair
+* natural clothing edges
+* no obvious halo
+* no hard sticker-like contour
+* no excessive blur
+* no shimmering around the subject
+* stable edges during movement
+* natural color around the boundary
+* sharp subject interior
+* professional-looking integration with the background
+
+Think Photoshop-quality subject masking and professional video compositing, NOT a simple CSS border/blur around a segmented person.
+
+Before changing the implementation, inspect the existing segmentation, alpha-mask, canvas/WebGL, and video rendering pipeline and improve the existing pipeline instead of replacing working functionality.

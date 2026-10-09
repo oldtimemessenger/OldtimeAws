@@ -1,0 +1,357 @@
+OLDTIMEHIVE: COMPLETE CREATOR MONETIZATION SYSTEM
+
+Build a production-oriented creator monetization system for Oldtimehive. This is an implementation task, not a request for a mockup or a plan.
+
+1. CORE BUSINESS OBJECTIVE
+
+Oldtimehive must support a creator economy that includes:
+
+1. Monthly creator subscriptions.
+2. Virtual coins and digital gifts.
+3. Livestream gifts and Super Chat-style interactions.
+4. Creator video monetization.
+5. Premium digital features.
+6. Creator earnings dashboards.
+7. Creator withdrawals through supported payout providers.
+8. Platform commissions and transparent financial reporting.
+
+The architecture must not require Stripe.
+
+Apple and Google must handle eligible in-app digital purchases through their applicable billing systems. Oldtimehive must separately calculate creator earnings, maintain its financial ledger, and manage creator payouts.
+
+Do not assume Apple or Google automatically distributes creator earnings.
+
+2. PLATFORM COMMISSION STRUCTURE
+
+Create a configurable commission system with the following initial business rules.
+
+Creator subscriptions
+
+* Proposed platform commission: 20% of the creator revenue allocation.
+* Proposed creator allocation: 80%.
+
+Virtual gifts and livestream gifts
+
+* Proposed platform commission: 20% of the distributable gift revenue.
+* Proposed creator allocation: 80%.
+
+Video monetization
+
+* Use a separate configurable revenue-sharing program.
+* Do not promise creators payments based solely on views.
+* Support future programs based on eligible views, engagement, advertising revenue, or a platform-funded rewards pool.
+* Require administrators to configure and activate each monetization program.
+
+Premium digital features
+
+* Revenue belongs to Oldtimehive unless a specific creator revenue-sharing agreement applies.
+
+IMPORTANT:
+These percentages are proposed business rules, not percentages guaranteed by Apple, Google, or any payment provider.
+
+Do not calculate creator earnings by blindly taking a percentage of the customer’s gross payment. Account for applicable store commissions, refunds, taxes, promotional discounts, and other relevant adjustments according to the configured revenue allocation policy.
+
+Make all commission percentages configurable without requiring code changes.
+
+3. APPLE AND GOOGLE BILLING
+
+Prepare the backend for integration with:
+
+* Apple In-App Purchase and App Store Server Notifications.
+* Google Play Billing and Google Play Developer API purchase verification.
+
+Requirements:
+
+1. Never trust a client-reported purchase as proof of payment.
+2. Verify purchases through the appropriate official server-side mechanisms.
+3. Process transaction identifiers idempotently.
+4. Prevent the same transaction from crediting a user’s account twice.
+5. Handle refunds, revocations, cancellations, and subscription expiration.
+6. Support subscription renewals and billing failures.
+7. Record the original transaction and all subsequent adjustments.
+8. Maintain separate purchase, entitlement, and creator-earnings records.
+9. Never expose private API credentials in frontend JavaScript.
+10. Do not simulate successful purchases in production.
+
+Respect the applicable App Store and Google Play policies for digital subscriptions, virtual currencies, gifts, and premium features.
+
+If the official billing credentials are not yet configured, implement the integration interfaces, database schema, configuration checks, and clearly labeled development tests. Do not pretend the integrations are live.
+
+4. VIRTUAL COIN SYSTEM
+
+Create an Oldtimehive virtual currency system.
+
+Users must be able to:
+
+* Purchase eligible coin packages.
+* View their coin balance.
+* Send digital gifts to creators.
+* Send gifts during supported livestreams.
+* View their coin transaction history.
+
+The system must maintain separate records for:
+
+* Purchased coins.
+* Promotional coins, if enabled.
+* Coins spent.
+* Gift transactions.
+* Creator earnings.
+* Platform revenue.
+* Refunds and reversals.
+
+Never treat a user’s purchased coin balance as cash.
+
+Never allow users to withdraw purchased coins as money.
+
+Creator earnings must be calculated according to a documented gift revenue allocation policy. Do not invent a fixed cash conversion rate without configuration and financial approval.
+
+Use integer values for currency amounts in their smallest supported units. Do not use floating-point arithmetic for financial calculations.
+
+5. CREATOR WALLET
+
+Build a creator earnings dashboard with:
+
+* Available earnings.
+* Pending earnings.
+* Lifetime earnings.
+* Subscription earnings.
+* Livestream gift earnings.
+* Video monetization earnings.
+* Platform commission breakdown.
+* Refund and adjustment history.
+* Withdrawal history.
+* Payment method management.
+* Monetization eligibility status.
+
+Proposed initial withdrawal policy:
+
+* Minimum withdrawal threshold: $25.
+* Creator earnings remain pending until the configured eligibility and settlement conditions are met.
+* Earnings become available only after applicable verification, refund-risk, and settlement requirements are satisfied.
+* Creators must complete required identity, tax, and payout verification before receiving withdrawals.
+* Administrators can place payouts on hold when legally or operationally justified.
+
+Make the withdrawal threshold configurable.
+
+Do not display pending earnings as immediately withdrawable.
+
+6. PAYOUT PROVIDER ARCHITECTURE
+
+Do not require Stripe.
+
+Design a provider-independent payout interface that can support eligible payout providers, including PayPal where the relevant product supports the business model.
+
+Do not assume an ordinary PayPal account automatically supports marketplace payouts or automated mass disbursements.
+
+Before enabling a provider, verify its supported countries, merchant eligibility, recipient onboarding requirements, API capabilities, fees, and compliance obligations.
+
+Create an abstraction similar to:
+
+* createRecipient()
+* verifyRecipient()
+* initiatePayout()
+* getPayoutStatus()
+* processPayoutWebhook()
+* handlePayoutFailure()
+
+Use the selected provider’s official API and authentication requirements.
+
+Keep all provider credentials on the backend.
+
+If no payout provider has been configured:
+
+* Build the creator wallet and payout management interfaces.
+* Allow eligible creators to see their available balance.
+* Display that withdrawals are not yet enabled.
+* Do not mark a payout as completed.
+* Do not invent a successful payment.
+* Do not collect unnecessary sensitive payment information.
+
+The architecture must permit a supported payout provider to be added later without rebuilding the creator ledger.
+
+7. FINANCIAL LEDGER
+
+Implement an auditable financial ledger.
+
+Every financial event must be recorded with:
+
+* Unique transaction identifier.
+* User or creator identifier where applicable.
+* Transaction type.
+* Gross amount.
+* Applicable deductions.
+* Platform allocation.
+* Creator allocation.
+* Currency.
+* Related purchase or gift identifier.
+* Transaction status.
+* Creation timestamp.
+* Settlement timestamp when applicable.
+* Reversal or refund reference when applicable.
+
+Use database transactions to maintain consistency.
+
+Use idempotency keys for purchase processing, gift accounting, and payouts.
+
+Never let a client directly modify:
+
+* Coin balances.
+* Creator earnings.
+* Platform revenue.
+* Available withdrawal balances.
+* Payout statuses.
+
+All balance changes must originate from trusted backend operations.
+
+Use an append-only financial event history. Corrections must create appropriate reversing or adjusting entries rather than silently rewriting historical transactions.
+
+Prevent negative balances and duplicate withdrawals through appropriate transactional controls.
+
+8. VIDEO MONETIZATION
+
+Prepare a configurable video monetization framework.
+
+Include:
+
+* Creator eligibility.
+* Monetization enrollment.
+* Eligible content requirements.
+* View qualification rules.
+* Fraud and artificial engagement detection hooks.
+* Earnings calculation records.
+* Monthly settlement periods.
+* Administrative review.
+* Dispute and adjustment records.
+
+Do not promise advertising revenue until an advertising program is actually implemented and approved.
+
+Do not automatically pay creators for every recorded view.
+
+9. ADMINISTRATOR DASHBOARD
+
+Provide authorized administrators with tools to:
+
+* Configure commission percentages.
+* Configure withdrawal thresholds.
+* Review creator eligibility.
+* Review creator earnings.
+* Inspect ledger entries.
+* Review refunds and reversals.
+* Review payout requests.
+* Place and release legitimate payout holds.
+* Inspect payout provider responses.
+* Reconcile store transactions.
+* Export financial reports.
+* Review suspected fraud.
+* Track outstanding creator liabilities.
+
+Every sensitive administrative action must be permission-controlled and audited.
+
+Do not provide a mechanism for silently editing creator balances.
+
+10. SECURITY AND COMPLIANCE
+
+Implement:
+
+* Server-side authorization.
+* Input validation.
+* Rate limiting where appropriate.
+* Secure webhook verification.
+* Idempotent event processing.
+* Protection against replay attacks.
+* Secure secret management.
+* Audit logging.
+* Database access controls.
+* Appropriate retention and deletion policies.
+
+Do not expose secret keys or administrative capabilities to the frontend.
+
+Do not assume that app-store purchase approval automatically resolves marketplace payout, money-transmission, tax reporting, or other legal obligations.
+
+Flag requirements that need review by a qualified professional before launch.
+
+11. DATABASE AND BACKEND
+
+Use the existing application architecture and database where possible.
+
+Before changing anything:
+
+1. Inspect the existing repository.
+2. Identify the actual frontend, backend, database, authentication, and deployment architecture.
+3. Inspect existing user, creator, subscription, gift, coin, and livestream models.
+4. Reuse existing functionality instead of creating duplicates.
+5. Create a migration plan before changing the schema.
+6. Preserve existing user accounts and application features.
+7. Do not introduce Supabase or another managed database if it conflicts with the existing architecture.
+8. Do not make Replit a required production dependency.
+9. Keep the application portable to our planned AWS infrastructure.
+10. Commit no secrets, private keys, or production credentials.
+
+If PostgreSQL is already configured, implement the financial schema and migrations using the existing database.
+
+Use appropriate unique constraints, foreign keys, indexes, and transactional operations.
+
+12. TESTING AND ACCEPTANCE CRITERIA
+
+Test at minimum:
+
+* Successful purchase verification.
+* Duplicate purchase notifications.
+* Subscription renewal.
+* Subscription expiration.
+* Gift sending.
+* Correct creator revenue allocation.
+* Correct platform commission calculation.
+* Refund processing.
+* Reversal of previously allocated earnings.
+* Duplicate payout requests.
+* Insufficient available balance.
+* Payout provider failure.
+* Payout webhook replay.
+* Unauthorized attempts to modify balances.
+* Concurrent withdrawals.
+* Database transaction failures.
+* Financial reconciliation.
+
+Use sandbox transactions and clearly separated test data.
+
+Do not activate real payments or withdrawals until the required provider credentials, merchant accounts, store configurations, and compliance requirements are satisfied.
+
+13. IMPLEMENTATION ORDER
+
+Build in this order:
+
+Phase 1: Repository audit, financial architecture, and database migrations.
+
+Phase 2: Creator ledger, coin accounting, commission calculations, and automated tests.
+
+Phase 3: Creator earnings dashboard and administrative controls.
+
+Phase 4: Apple and Google purchase verification integrations.
+
+Phase 5: Payout provider integration after the supported provider is selected and configured.
+
+Phase 6: Video monetization framework.
+
+Phase 7: End-to-end testing, reconciliation, security review, and production-readiness assessment.
+
+Do not rebuild the existing application from scratch.
+
+Do not remove or redesign unrelated features.
+
+Do not deploy the application or enable live financial transactions as part of this task.
+
+At completion, provide:
+
+* Files changed.
+* Database migrations created.
+* Features implemented.
+* Tests performed and results.
+* External accounts and credentials still required.
+* Store configuration requirements.
+* Payout provider requirements.
+* Outstanding compliance questions.
+* Any incomplete integrations.
+* Exact instructions for the next implementation phase.
+
+Begin by inspecting the existing codebase and reporting its actual architecture. Then implement the first safe, testable phase.

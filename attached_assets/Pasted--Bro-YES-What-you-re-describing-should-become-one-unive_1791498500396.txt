@@ -1,0 +1,688 @@
+😂🫡 Bro YES. What you’re describing should become one universal Old Time Creative Editor, not separate editors for camera, Status, comments, uploads, etc.
+
+The key is: build the editor once, then reuse it everywhere. Camera, uploaded video, photos, Status, comment remix, community posts, profile content, all of it gets the same text/emoji/drawing/layer system.
+
+Give Replit this exact prompt:
+
+I want you to build a UNIVERSAL OLD TIME CREATIVE EDITOR.
+
+This is a major platform-level system.
+
+Do NOT build separate basic editors for Camera, Status, Comment Remix, Photo Upload, Video Upload, etc.
+
+Build ONE reusable creative editing engine and connect every creation surface to it.
+
+The same editor should power:
+
+* Camera
+* Photo capture
+* Video recording
+* Photo uploads
+* Video uploads
+* Status/Story
+* Comment Remix
+* Post creation
+* Community posts
+* Future remix features
+
+The experience should feel like a combination of Snapchat’s creative editor, TikTok’s editing tools, Instagram Stories, and a lightweight Photoshop-style layer canvas, while maintaining Old Time’s own design.
+
+==================================================
+
+1. FULL-SCREEN CREATIVE CANVAS
+    ==================================================
+
+When someone takes or uploads a photo/video, immediately open the media inside a full-screen editing canvas.
+
+The media is the background.
+
+Everything added on top is a separate editable layer.
+
+Example:
+
+MEDIA
+↓
+TEXT
+↓
+EMOJI
+↓
+COMMENT
+↓
+STICKER
+↓
+DRAWING
+
+Do not flatten these layers while editing.
+
+Every object must remain independently editable.
+
+==================================================
+2. FREELY POSITION EVERYTHING
+
+Everything placed on the canvas must be freely movable.
+
+The user can:
+
+* Drag text anywhere
+* Drag emojis anywhere
+* Drag stickers anywhere
+* Drag comments anywhere
+* Drag drawings anywhere
+* Move multiple objects independently
+
+Do NOT force objects into predefined top/bottom positions.
+
+Allow completely free placement.
+
+The user should be able to put text directly over someone’s face, beside them, above them, underneath them, etc.
+
+==================================================
+3. TWO-FINGER GESTURES
+
+Implement proper native-feeling multi-touch gestures.
+
+One finger:
+
+* Move selected object
+
+Two fingers:
+
+* Pinch = resize/scale
+* Rotate = rotate
+* Move = reposition
+
+The gesture must feel smooth.
+
+Scaling must preserve aspect ratio where appropriate.
+
+Rotation should allow completely free rotation.
+
+Do not make users interact with tiny resize handles.
+
+Pinch-to-scale should be the primary mobile interaction.
+
+==================================================
+4. TYPE DIRECTLY ON THE MEDIA
+
+This is extremely important.
+
+When the user taps the Text button:
+
+DO NOT open a separate boring form where they type text somewhere else.
+
+Instead:
+
+1. Create a text object directly on the canvas.
+2. Put the cursor inside the text object.
+3. Open the mobile keyboard.
+4. Let the user type directly onto the image/video.
+5. The text should visibly appear on the actual media while they type.
+
+Example:
+
+User takes a picture.
+
+They tap “Text.”
+
+A text object appears directly over the picture:
+
+| Type something… |
+
+The user types:
+
+“this is crazy 😂”
+
+and sees the text appear live on the photo.
+
+This should feel like typing directly ON the image.
+
+==================================================
+5. FULL TEXT EDITOR
+
+Build a real on-screen text editor.
+
+When text is selected, provide controls for:
+
+* Font
+* Font size
+* Bold
+* Italic
+* Alignment
+* Text color
+* Highlight/background
+* Background opacity
+* Letter spacing
+* Line spacing
+* Text shadow
+* Text outline/stroke
+* Text opacity
+* Text alignment
+* Uppercase/lowercase styles
+* Text bubble styles
+* Text animation where appropriate
+
+Include several carefully designed fonts/styles.
+
+Do not overwhelm the user.
+
+The controls should feel clean and modern.
+
+The text itself should remain directly editable on the canvas.
+
+Double tap an existing text object:
+→ enter editing mode
+→ keyboard opens
+→ cursor appears
+→ user edits directly.
+
+==================================================
+6. TEXT MOVEMENT
+
+After typing, the user can dismiss the keyboard and manipulate the text exactly like a sticker.
+
+One finger:
+Move
+
+Two fingers:
+Scale + rotate
+
+Tap:
+Select
+
+Double tap:
+Edit text
+
+Long press:
+Show layer options
+
+The text should never become permanently embedded into the media until final rendering/export.
+
+==================================================
+7. EMOJIS
+
+Add a dedicated Emoji tool.
+
+User taps Emoji.
+
+Open a clean emoji picker.
+
+After selecting an emoji:
+
+Place it directly onto the canvas.
+
+The emoji becomes a layer.
+
+Support:
+
+* Drag
+* Pinch resize
+* Rotate
+* Duplicate
+* Delete
+* Timing on video
+
+Do not rasterize emojis unnecessarily.
+
+Keep them crisp at different sizes.
+
+==================================================
+8. STICKERS
+
+Create a reusable sticker system.
+
+Users should be able to add:
+
+* Emoji-style stickers
+* Reaction stickers
+* GIFs where supported
+* Decorative elements
+* Shapes
+* Arrows
+* Hearts
+* Location
+* Mentions
+* Hashtags
+* Music/audio indicators
+* Poll/question elements where applicable
+
+Everything is a layer.
+
+Everything can be moved/scaled/rotated.
+
+==================================================
+9. FREEHAND DRAWING
+
+Add a Draw tool.
+
+The user can literally draw directly over the photo/video with their finger.
+
+Support:
+
+* Freehand pen
+* Marker
+* Highlighter
+* Eraser
+* Stroke width
+* Opacity
+* Undo
+* Redo
+
+Drawing must remain aligned correctly when the media is transformed.
+
+Do not make drawing feel like a separate page.
+
+The user should draw directly on the actual canvas.
+
+==================================================
+10. FREEHAND WRITING
+
+I specifically want HANDWRITTEN TEXT.
+
+Add a handwriting/freehand mode.
+
+The user can use their finger to physically write words on the image/video.
+
+Example:
+
+They take a picture.
+
+Tap Draw/Handwriting.
+
+They write:
+
+“Look at this 😂”
+
+with their finger.
+
+That handwriting becomes its own layer.
+
+Allow:
+
+* Stroke size
+* Opacity
+* Eraser
+* Undo/redo
+* Move
+* Scale
+* Rotate
+
+This should be available everywhere the creative editor exists.
+
+==================================================
+11. VIDEO TIMELINE
+
+For videos, every overlay must support timing.
+
+Example:
+
+Video = 15 seconds
+
+Text:
+0:02 → 0:07
+
+Emoji:
+0:05 → 0:12
+
+Comment:
+0:00 → 0:15
+
+Drawing:
+0:03 → 0:09
+
+Provide a simple mobile timeline.
+
+The user should be able to drag the start/end points of an overlay.
+
+Do not build an unnecessarily complicated professional video editor.
+
+Keep it simple and mobile-first.
+
+==================================================
+12. COMMENT REMIX INTEGRATION
+
+The Comment Remix system MUST use this same editor.
+
+When a user selects:
+
+Comment → Remix
+
+the comment becomes another layer.
+
+They can:
+
+* Move it
+* Pinch resize
+* Rotate
+* Add text
+* Add emojis
+* Draw around it
+* Add stickers
+* Add additional comments where appropriate
+* Record video behind it
+* Upload media behind it
+
+The comment remains linked to its original source.
+
+==================================================
+13. STATUS/STORY INTEGRATION
+
+Status must use the exact same editor.
+
+Example:
+
+Photo → Edit → Text → Emoji → Drawing → Sticker → Publish Status
+
+OR
+
+Video → Edit → Text → Comment → Drawing → Publish Status
+
+No separate limited Status editor.
+
+==================================================
+14. CAMERA INTEGRATION
+
+Camera should open directly into the creation experience.
+
+Support:
+
+Photo
+Video
+Camera switching
+Flash
+Zoom
+Timer
+Gallery/upload
+
+After capture:
+
+OPEN UNIVERSAL CREATIVE EDITOR.
+
+Do not immediately flatten anything.
+
+==================================================
+15. UPLOADED MEDIA
+
+When the user selects an existing photo/video from their device:
+
+Import it into the same editor.
+
+The user should have exactly the same editing tools available as if they captured the media using the Old Time camera.
+
+Camera media and uploaded media must not have different editing capabilities.
+
+==================================================
+16. LAYERS
+
+Build an actual layer system.
+
+Every element has:
+
+id
+type
+position
+scale
+rotation
+opacity
+zIndex
+startTime
+endTime
+content
+style
+metadata
+
+Example:
+
+{
+type: “text”,
+content: “Look at this 😂”,
+position: {…},
+scale: 1.2,
+rotation: -4,
+startTime: 2,
+endTime: 8
+}
+
+Support:
+
+Bring forward
+Send backward
+Duplicate
+Delete
+Lock
+Hide
+
+A simple layer panel can be opened when needed.
+
+==================================================
+17. DELETE GESTURE
+
+Implement the familiar mobile delete interaction.
+
+When dragging a selected object toward the bottom delete zone:
+
+show the delete target.
+
+If released over it:
+
+delete the object.
+
+Make this feel smooth and obvious.
+
+==================================================
+18. UNDO / REDO
+
+Everything should support:
+
+Undo
+Redo
+
+Examples:
+
+Add text
+Move text
+Resize text
+Rotate text
+Draw
+Erase
+Add emoji
+Delete sticker
+
+The user should never feel trapped by an accidental edit.
+
+==================================================
+19. SMART SELECTION
+
+Make object selection easy.
+
+When an object is selected:
+
+show subtle selection feedback.
+
+Do NOT put ugly permanent borders around objects.
+
+When the user taps somewhere else:
+
+selection disappears.
+
+The final published media must contain ZERO editing handles.
+
+==================================================
+20. QUALITY REQUIREMENTS
+
+This is extremely important.
+
+Do not build this as a collection of cheap HTML overlays.
+
+The editing canvas needs to feel polished.
+
+Prevent:
+
+* blurry text
+* jagged edges
+* stretched emojis
+* clipped text
+* broken rotation
+* incorrect scaling
+* objects jumping when keyboard opens
+* objects moving when the keyboard closes
+* incorrect video coordinates
+* incorrect aspect ratios
+* text being cut off
+* overlays disappearing during export
+
+Use high-quality rendering appropriate for the platform.
+
+Maintain crisp text and vector-like elements wherever possible.
+
+==================================================
+21. SAFE AREAS
+
+Respect device safe areas.
+
+Do not allow important text to accidentally sit underneath:
+
+* Status bar
+* Camera cutout/Dynamic Island
+* Bottom navigation
+* Platform controls
+
+But DO NOT restrict the user’s creativity.
+
+Allow objects to be placed outside the recommended safe area if they intentionally choose to do so.
+
+Show subtle safe-area guidance only while editing.
+
+==================================================
+22. ASPECT RATIOS
+
+Support the media formats Old Time needs:
+
+9:16
+1:1
+4:5
+16:9
+
+The canvas must correctly maintain the selected aspect ratio.
+
+Coordinates must remain correct when exporting.
+
+==================================================
+23. AUDIO / VIDEO
+
+Do not destroy the original video’s audio.
+
+If the user adds supported music/audio, preserve the appropriate audio track.
+
+Do not require a third-party video editing service just to place text, emojis, drawings, or comments over a video.
+
+Use client-side/browser capabilities where practical.
+
+==================================================
+24. PERFORMANCE
+
+This must work well on mobile browsers.
+
+Do not make every gesture trigger expensive full-video re-rendering.
+
+Use an efficient preview/editing architecture.
+
+Only perform final compositing/rendering when necessary.
+
+Keep interactions at a smooth frame rate.
+
+==================================================
+25. REUSABLE ARCHITECTURE
+
+Create the editor as a reusable component/system.
+
+Something conceptually like:
+
+Then reuse it for:
+
+camera
+upload
+status
+comment-remix
+post
+community
+future remix features
+
+Do NOT duplicate the editor code for every feature.
+
+==================================================
+26. MOST IMPORTANT UX RULE
+
+I want the user to feel like:
+
+“I am editing the actual picture/video.”
+
+NOT:
+
+“I uploaded a picture and now I’m filling out a form.”
+
+The canvas is the experience.
+
+If I want text:
+
+I tap Text → text appears on the media → keyboard opens → I type directly there.
+
+If I want an emoji:
+
+I tap Emoji → select it → it appears on the media → I move/resize/rotate it.
+
+If I want to draw:
+
+I tap Draw → I draw directly on the media.
+
+If I want to remix a comment:
+
+I select the comment → it appears on the media → I freely move/resize/rotate it.
+
+Everything should behave consistently.
+
+==================================================
+27. FINAL TEST
+
+Test every creation surface manually.
+
+CAMERA:
+Take photo → Text → type directly → resize → rotate → emoji → draw → publish.
+
+VIDEO:
+Record → Text → timing → emoji → drawing → preview → publish.
+
+UPLOAD:
+Upload photo → same exact tools → publish.
+
+STATUS:
+Photo/video → same exact editor → publish.
+
+COMMENT:
+Comment → Remix → comment layer → text → emoji → drawing → publish.
+
+COMMUNITY:
+Create post → same editor.
+
+Test on a real mobile viewport.
+
+Fix every issue involving:
+gestures
+keyboard
+layer positioning
+scaling
+rotation
+text editing
+drawing
+video timing
+aspect ratio
+safe areas
+rendering
+export
+
+Do not mark this feature complete until the entire editor behaves like one unified system.
+
+The goal is a polished Old Time Creative Studio, not several disconnected social-media editors.
+
+And one thing I would absolutely make Replit understand: the “type directly on the image” part isn’t just a cosmetic feature. The text object needs to stay a real editable layer while you’re editing. That’s what makes the whole thing feel like Snapchat/Instagram/TikTok instead of a clunky form slapped on top of a camera.
+
+Once this is built right, bro, your comment remix, Status, camera, uploads, community posts, and future Remix system all get the same damn creative engine. 😭🔥

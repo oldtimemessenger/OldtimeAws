@@ -1,0 +1,33 @@
+Fix the confirmed AWS Cognito redirect_mismatch error in Oldtimehive.
+
+CONFIRMED CONFIGURATION:
+
+* AWS region: us-east-2
+* Cognito user pool: us-east-2_b1eN3GPPt
+* Cognito app client: 7pncf9bp593q26gbeggn1temtt
+* Cognito domain: us-east-2b1en3gppt.auth.us-east-2.amazoncognito.com
+* Current callback requested by the application:
+    https://f39e9284-f551-4d3d-b774-795710340230-00-y7f27saism07.janeway.replit.dev/
+
+AWS returns error=redirect_mismatch for this authorization request.
+
+TASK:
+
+1. Inspect the application’s authentication configuration and identify why it generates this Replit development callback.
+2. Determine whether this URL is still the intended development callback or whether the application should use a different existing callback.
+3. If the current URL is still required, use authorized AWS administrative access to inspect the app client’s existing allowed callback URLs and add the exact URL only if appropriate, preserving all existing entries.
+4. If the URL is obsolete, update the application to use the correct approved callback and ensure the OAuth state and PKCE verification still work.
+5. Verify that the authorization request uses the correct Cognito domain, client ID, response_type=code, S256 PKCE, and matching callback URL.
+6. Test the authorization flow again and report the actual result.
+
+SECURITY REQUIREMENTS:
+
+* Do not recreate the user pool or app client.
+* Do not add wildcard callback URLs.
+* Do not enable implicit OAuth flow as a workaround.
+* Do not expose secrets or weaken authentication.
+* Do not claim AWS settings were changed unless an authorized AWS administrative operation confirms the change.
+* If AWS administrative access is unavailable, explain exactly which console setting I must change and provide the safest instructions.
+
+IMPORTANT:
+This application is intended to move away from Replit. Do not permanently bind production authentication to a temporary Replit development URL. Keep development and production callback configurations separate where appropriate.

@@ -1,0 +1,113 @@
+**Old Time** – a clean, normal social-media app focused on posts, photos, short videos, friends, and simple sharing (no Meta or Instagram branding, language, or layout).
+
+Here’s a full, original settings & activity structure written in plain words for your app:
+
+### Settings and activity
+
+**How you use Old Time**  
+- Saved  
+- Archive  
+- Your activity  
+- Notifications  
+- Time management  
+- Old Time on tablet  
+- Old Time on TV  
+
+**Your insights and tools**  
+- Creator dashboard  
+- Account type and tools  
+- Ad payments  
+
+**Subscriptions**  
+- Old Time Plus (Not subscribed)  
+- Old Time Premium (Not subscribed)  
+
+**Who can see your content**  
+- Account privacy (Public)  
+- Close circle  
+- Cross-sharing  
+- Blocked (number)  
+- Stories, live & location  
+- Activity in Friends feed  
+
+**How others can interact with you**  
+- Messages and story replies  
+- Tags and mentions  
+- Comments  
+- Sharing and reuse  
+- Restricted (number)  
+- Limit interactions (Off)  
+- Hidden words  
+- Follow and invite friends  
+
+**What you see**  
+- Favorites (0)  
+- Muted accounts (number)  
+- Content preferences  
+- Like and share counts  
+
+**Your app and media**  
+- Device permissions  
+- Archiving and downloading  
+- Accessibility  
+- Language and translations  
+- Media quality  
+- App website permissions  
+
+**Family Center**  
+
+### Fundraisers  
+No active fundraiser found.  
+Create a fundraiser to support a cause you care about.  
+[Create fundraiser button]
+
+### Help and support  
+Search help articles  
+
+- Report a problem  
+- Account Status (Review your account status)  
+- Old Time Plus (Get a verified badge, priority support and exclusive benefits)  
+
+**Your support activity**  
+- Reports and violations (Reports, violations and any monetization support requests)
+
+### Privacy Center  
+Make the privacy choices that are right for you. Learn how to manage and control your privacy on Old Time and related services.
+
+**We build privacy into our products**  
+- Private messaging (End-to-end encryption so conversations stay private)  
+- Teen privacy (Default settings that help create safe, age-appropriate experiences)  
+- Ads education (See why you saw an ad and choose more of what you like)
+
+**Settings to help control your privacy**  
+Review settings button  
+
+**Privacy topics**  
+Get answers to privacy questions and manage your information the way you want.  
+- Review and manage your information  
+- Generative AI at Old Time  
+
+View all topics  
+
+More privacy resources  
+Learn more in the Privacy Policy  
+
+### Account Status  
+Your account meets all our guidelines.  
+You don’t have removed content or messages, feature restrictions or recommendation limits.
+
+- Features ✓  
+- Content and message removals ✓  
+- Recommendation eligibility ✓  
+- Availability to people under 18 ✓  
+- Monetization ✓  
+
+[Get support]
+
+### Edit profile  
+- Birthday  
+- City  
+- Profile cover (Upload a custom cover or use automatic cover)  
+- Interests (choose up to 8 – examples: Fitness, Running, Basketball, Yoga, College life, Nursing, Cybersecurity, Study groups, Gaming, Cars, Music, Photography, Fashion, Food, Tech, Travel, Art & design, Pets, Beauty)
+
+This gives you a complete, original settings system for **Old Time** that feels like a regular social app while staying fully independent. Let me know which section you want expanded into actual screens, copy, or code next.

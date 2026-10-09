@@ -1,0 +1,171 @@
+Old Time – Exact Button Hierarchy, Empty States, Full Community Guidelines & Privacy Policy Language
+
+1. Exact Button Hierarchy & Empty States
+Gift Drawer (Live & Offline)
+Hierarchy (top to bottom):
+
+Back / Close (top-left)
+Recipient name + live indicator (or “Offline”)
+Coin balance + Top up button
+Tab bar: Popular | New | Classic | Animated | Limited
+Gift grid (scrollable)
+Quantity selector row
+Send anonymously toggle
+Add a message field (optional)
+Primary: Send Gift (full-width, blue)
+Secondary: Cancel (text button)
+
+Empty states:
+
+No gifts in a tab: “No gifts in this category yet. Check back soon.”
+Zero coin balance: “You need Old Time Coins to send gifts.” + Top up button
+Failed to load gifts: “Couldn’t load gifts. Pull to refresh.” + Try again
+
+Membership Screen
+Hierarchy:
+
+Back
+Title: Old Time Membership
+Status card
+Benefits list
+Price
+Primary: Subscribe / Manage subscription
+Secondary: Restore purchase
+Footer link: Terms of Membership
+
+Empty / edge states:
+
+Not subscribed: Full benefits list + Subscribe button
+Subscribed: “Membership active – renews on [date]” + Manage + Cancel
+Payment failed: “Payment could not be processed.” + Update payment method
+Restore failed: “No previous purchase found.”
+
+Blue Badge Screen
+Hierarchy:
+
+Back
+Title: Blue Badge
+Status (Verified / Not verified)
+Requirements or badge preview
+Primary: Apply for Blue Badge / View verification details
+Secondary: Learn more
+
+Empty states:
+
+Application pending: “Your application is under review. We’ll notify you within 7 days.”
+Rejected: “Your application was not approved. [Reason]” + Apply again
+Already verified: Badge preview + “You have the Blue Badge”
+
+Gift Activity & Revenue Dashboard
+Hierarchy:
+
+Back
+Title: Gift Activity
+Tabs: Received | Sent | Revenue
+Filter (All time / This month / This week)
+List or stats
+Primary actions: Withdraw funds / View payout history
+
+Empty states:
+
+Received: “No gifts received yet. Share your profile to get started.”
+Sent: “You haven’t sent any gifts yet.”
+Revenue: “No revenue yet. Go live or share your profile to receive gifts.”
+Withdrawal unavailable: “Minimum balance of $20 required to withdraw.”
+
+Settings → Gifts & Membership
+Hierarchy:
+
+Membership status (tappable row)
+Blue Badge status (tappable row)
+Gift receiving preferences (tappable → sub-screen with radio options)
+Gift notifications (tappable → toggles)
+Anonymous gifts (toggle)
+Gift message filter (tappable)
+Live gift animations (tappable → On / Off / Reduced motion)
+Offline gift privacy (tappable → radio options)
+
+
+2. Full Community Guidelines Section
+(Old Time Community Guidelines – Gifts, Live & Membership)
+Respect & Safety
+
+Do not send gifts or messages that harass, threaten, bully, or sexually exploit anyone.
+Do not use gifts to spam, manipulate, or pressure other users.
+Hate speech, discrimination, or content that promotes violence is not allowed in gift messages or live streams.
+
+Live Streaming
+
+You are responsible for everything that happens on your live stream.
+Do not broadcast illegal activity, nudity, excessive violence, or dangerous challenges.
+Do not encourage viewers to send gifts in exchange for anything illegal or harmful.
+Old Time may end a live stream and restrict the account if guidelines are broken.
+
+Gifts & Messages
+
+Gift messages must follow the same rules as comments and posts.
+Do not use anonymous gifts to harass or evade blocks.
+Impersonation through gifts or fake Blue Badge claims is prohibited.
+
+Membership & Blue Badge
+
+Do not share membership accounts.
+Providing false identity information for the Blue Badge will result in permanent removal of the badge and possible account suspension.
+Buying or selling Blue Badges or memberships outside official channels is not allowed.
+
+Consequences
+
+Violations may result in:
+
+Removal of specific gifts or messages
+Temporary or permanent loss of live privileges
+Removal of Blue Badge
+Suspension or permanent ban of the account
+Forfeiture of pending gift revenue in serious cases
+
+Old Time reviews reports and takes action based on the severity and history of violations.
+
+3. Complete Privacy Policy Language
+(Old Time Privacy Policy – Gifts, Membership & Related Features)
+Gifts and Virtual Currency
+
+When you send or receive gifts, we collect and process:
+
+The sender and recipient account IDs
+Gift type, quantity, and coin value
+Timestamp and whether the gift was sent during a live stream or offline
+Optional message attached to the gift
+Whether the gift was sent anonymously
+
+This information is used to deliver the gift, calculate creator revenue, prevent fraud, and enforce our guidelines. Gift transaction records are retained for as long as your account is active and for a limited period afterward to meet legal and accounting requirements.
+Membership
+
+If you subscribe to Old Time Membership, we collect payment information (processed by our payment partners), subscription status, renewal dates, and cancellation requests. We use this data to provide membership benefits, manage billing, and send related notifications.
+Blue Badge Verification
+
+If you apply for the Blue Badge, we collect the identity information you submit (such as government ID or other verification documents) solely for the purpose of confirming authenticity. This data is stored securely and is not used for advertising. You may request deletion of verification documents after the review process is complete, subject to legal retention requirements.
+Revenue and Payouts
+
+For creators who receive gifts, we process revenue share calculations, payout requests, tax information (where required), and identity verification needed for withdrawals. Payout data is shared with our payment processors only as necessary to complete transfers.
+Your Controls
+
+You can:
+
+Choose who is allowed to send you gifts
+Turn gift notifications on or off
+Control whether others can see that you received gifts
+Block anonymous gifts
+Cancel membership at any time
+Request deletion of your gift history and verification data (subject to legal holds)
+
+Data Sharing
+
+We do not sell your gift or membership data. We share information only with:
+
+Payment processors to complete transactions
+Service providers who help us operate the gift and membership systems (under strict contracts)
+Law enforcement or regulators when required by law
+
+Children
+
+Users under 18 cannot purchase Old Time Coins or send paid gifts. We do not knowingly collect payment or gift data from children under 13.

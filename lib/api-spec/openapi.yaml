@@ -1,0 +1,1294 @@
+openapi: 3.1.0
+info:
+  # Do not change the title, if the title changes, the import paths will be broken
+  title: Api
+  version: 0.1.0
+  description: API specification
+servers:
+  - url: /api
+    description: Base API path
+tags:
+  - name: health
+    description: Health operations
+  - name: auth
+    description: Account registration and sessions
+  - name: social
+    description: Cloud-backed profiles, posts, and likes
+paths:
+  /auth/cognito/config:
+    get:
+      operationId: getCognitoConfiguration
+      tags: [auth]
+      summary: Get public hosted sign-in configuration
+      responses:
+        "200":
+          description: Public configuration; never includes a client secret
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CognitoConfiguration"
+        "503":
+          description: Sign-in configuration is incomplete
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /auth/cognito/exchange:
+    post:
+      operationId: exchangeCognitoSession
+      tags: [auth]
+      summary: Verify a PKCE sign-in and optionally link an authenticated existing account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CognitoExchangeInput"
+      responses:
+        "200":
+          description: Verified account session
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "400":
+          description: Invalid sign-in request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Sign-in could not be verified
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "403":
+          description: Identity does not match the account being linked
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "409":
+          description: Existing account must be linked explicitly
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "429":
+          description: Too many attempts
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "503":
+          description: Sign-in provider is unavailable or not configured
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /auth/register:
+    post:
+      operationId: registerAccount
+      tags: [auth]
+      summary: Create a cloud account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterInput"
+      responses:
+        "201":
+          description: Account created and signed in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "400":
+          description: Invalid account details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "409":
+          description: Username or email is already registered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "429":
+          description: Too many registration attempts
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /auth/login:
+    post:
+      operationId: loginAccount
+      tags: [auth]
+      summary: Sign in to a cloud account
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginInput"
+      responses:
+        "200":
+          description: Signed in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "400":
+          description: Invalid sign-in details
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Email, username, or password is incorrect
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "429":
+          description: Too many sign-in attempts
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /auth/me:
+    get:
+      operationId: getMyAccount
+      tags: [auth]
+      summary: Get the signed-in account
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Signed-in account
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/MyAccountResponse"
+        "401":
+          description: Sign-in required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /auth/logout:
+    post:
+      operationId: logoutAccount
+      tags: [auth]
+      summary: End this device's session
+      security:
+        - BearerAuth: []
+      responses:
+        "200":
+          description: Session ended
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LogoutResponse"
+        "401":
+          description: Sign-in required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /auth/password:
+    post:
+      operationId: changeAccountPassword
+      tags: [auth]
+      summary: Change the signed-in account password
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PasswordChangeInput"
+      responses:
+        "200":
+          description: Password changed
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PasswordChangeResponse"
+        "400":
+          description: Invalid password change request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Sign-in required or current password is incorrect
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Account not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /feed:
+    get:
+      operationId: listFeed
+      tags: [social]
+      summary: Read recent cloud posts
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 50
+            default: 30
+      responses:
+        "200":
+          description: Recent posts and like state for the signed-in account
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/FeedResponse"
+        "401":
+          description: Sign-in required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /posts:
+    post:
+      operationId: createPost
+      tags: [social]
+      summary: Publish a text post
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreatePostInput"
+      responses:
+        "201":
+          description: Post saved to the cloud
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostCreationResult"
+        "400":
+          description: Invalid post
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Sign-in required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /posts/import:
+    post:
+      operationId: importLegacyPosts
+      tags: [social]
+      summary: Idempotently import text-only posts from this device
+      security:
+        - BearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostImportInput"
+      responses:
+        "200":
+          description: Per-post import confirmation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostImportResponse"
+        "400":
+          description: Invalid import batch
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Sign-in required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /posts/{id}/like:
+    put:
+      operationId: likePost
+      tags: [social]
+      summary: Like a post
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Post liked
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LikeResponse"
+        "401":
+          description: Sign-in required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Post not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      operationId: unlikePost
+      tags: [social]
+      summary: Remove a like from a post
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "200":
+          description: Post unliked
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/LikeResponse"
+        "401":
+          description: Sign-in required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Post not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /posts/{id}:
+    delete:
+      operationId: deletePost
+      tags: [social]
+      summary: Delete one of your posts
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        "204":
+          description: Post deleted
+        "401":
+          description: Sign-in required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Post not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /users/search:
+    get:
+      operationId: searchUsers
+      tags: [social]
+      summary: Search public profiles by username or display name
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: query
+          in: query
+          required: true
+          schema:
+            type: string
+            minLength: 2
+            maxLength: 50
+      responses:
+        "200":
+          description: Matching public profiles
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserSearchResults"
+        "400":
+          description: Invalid search query
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "401":
+          description: Sign-in required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /profiles/{username}:
+    get:
+      operationId: getUserProfile
+      tags: [social]
+      summary: Read a public profile and its recent posts
+      security:
+        - BearerAuth: []
+      parameters:
+        - name: username
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 24
+      responses:
+        "200":
+          description: Public profile and recent posts
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ProfileResponse"
+        "401":
+          description: Sign-in required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Profile not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /creator/center:
+    get:
+      operationId: getCreatorCenter
+      tags: [creator]
+      security: [{ BearerAuth: [] }]
+      responses:
+        "200": { description: Server evaluated creator progress, content: { application/json: { schema: { $ref: "#/components/schemas/CreatorDashboard" } } } }
+  /creator/content:
+    get:
+      operationId: listMyCreatorContent
+      tags: [creator]
+      security: [{ BearerAuth: [] }]
+      responses:
+        "200":
+          description: Private owner-only synced originals
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [content]
+                properties:
+                  content: { type: array, items: { type: object, required: [id, sourceId, original], properties: { id: { type: string, format: uuid }, sourceId: { type: string }, original: { type: boolean } } } }
+    post:
+      operationId: syncCreatorOriginal
+      tags: [creator]
+      security: [{ BearerAuth: [] }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/CreatorContentInput" } } } }
+      responses:
+        "200": { description: Original saved without publishing private content, content: { application/json: { schema: { type: object, required: [id, original], properties: { id: { type: string, format: uuid }, original: { type: boolean } } } } } }
+  /creator/content/{id}:
+    delete:
+      operationId: removeCreatorOriginal
+      tags: [creator]
+      security: [{ BearerAuth: [] }]
+      parameters: [{ name: id, in: path, required: true, schema: { type: string, format: uuid } }]
+      responses:
+        "200": { description: Credit removed; failed media cleanup is retried, content: { application/json: { schema: { type: object, required: [deleted, cleanupPending], properties: { deleted: { type: boolean }, cleanupPending: { type: boolean } } } } } }
+  /creator/content/upload:
+    post:
+      operationId: requestCreatorMediaUpload
+      tags: [creator]
+      security: [{ BearerAuth: [] }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/CreatorMediaUploadInput" } } } }
+      responses:
+        "200": { description: Private media upload reservation, content: { application/json: { schema: { type: object, required: [id, uploadUrl], properties: { id: { type: string, format: uuid }, uploadUrl: { type: string } } } } } }
+  /posts/{postId}/comments:
+    get:
+      operationId: listCloudPostComments
+      tags: [social]
+      security: [{ BearerAuth: [] }]
+      parameters: [{ name: postId, in: path, required: true, schema: { type: string, format: uuid } }]
+      responses:
+        "200": { description: Authenticated public-post discussion, content: { application/json: { schema: { type: object, required: [comments], properties: { comments: { type: array, items: { $ref: "#/components/schemas/CloudComment" } } } } } } }
+    post:
+      operationId: addCloudPostComment
+      tags: [social]
+      security: [{ BearerAuth: [] }]
+      parameters: [{ name: postId, in: path, required: true, schema: { type: string, format: uuid } }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/CloudCommentInput" } } } }
+      responses:
+        "200": { description: Discussion persisted, content: { application/json: { schema: { $ref: "#/components/schemas/CloudComment" } } } }
+  /posts/{postId}/comments/{commentId}:
+    delete:
+      operationId: deleteCloudPostComment
+      tags: [social]
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - { name: postId, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: commentId, in: path, required: true, schema: { type: string, format: uuid } }
+      responses:
+        "200": { description: Owner removed comment, content: { application/json: { schema: { type: object, required: [deleted], properties: { deleted: { type: boolean } } } } } }
+  /creator/evaluate:
+    post:
+      operationId: evaluateMyCreatorEligibility
+      tags: [creator]
+      security: [{ BearerAuth: [] }]
+      responses:
+        "200": { description: Refreshed evaluation, content: { application/json: { schema: { $ref: "#/components/schemas/CreatorDashboard" } } } }
+  /badge/membership:
+    get:
+      operationId: getBlueBadgeMembership
+      tags: [creator]
+      security: [{ BearerAuth: [] }]
+      responses:
+        "200": { description: Store verified membership, content: { application/json: { schema: { $ref: "#/components/schemas/BlueBadgeMembership" } } } }
+  /badge/interest:
+    post:
+      operationId: registerBlueBadgeInterest
+      tags: [creator]
+      security: [{ BearerAuth: [] }]
+      responses:
+        "200": { description: Interest saved, content: { application/json: { schema: { type: object, required: [interested], properties: { interested: { type: boolean } } } } } }
+  /creator/badges:
+    get:
+      operationId: getVerifiedBlueBadges
+      tags: [creator]
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - { name: userIds, in: query, required: true, schema: { type: string, maxLength: 1850 } }
+      responses:
+        "200":
+          description: Active badge status for up to 50 accounts
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [badges]
+                properties:
+                  badges:
+                    type: array
+                    items: { type: object, required: [userId, active], properties: { userId: { type: string, format: uuid }, active: { type: boolean } } }
+  /announcements:
+    get:
+      operationId: getAccountAnnouncements
+      tags: [creator]
+      security: [{ BearerAuth: [] }]
+      responses:
+        "200":
+          description: Eligible announcements respecting account preferences and dismissals
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [announcements, unreadCount]
+                properties:
+                  announcements: { type: array, items: { $ref: "#/components/schemas/AnnouncementCampaign" } }
+                  unreadCount: { type: integer }
+  /announcements/{id}/dismiss:
+    post:
+      operationId: dismissAccountAnnouncement
+      tags: [creator]
+      security: [{ BearerAuth: [] }]
+      parameters: [{ name: id, in: path, required: true, schema: { type: string, maxLength: 80 } }]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/AnnouncementDismissInput" } } }
+      responses:
+        "200": { description: Dismissal saved, content: { application/json: { schema: { type: object, required: [dismissed], properties: { dismissed: { type: boolean } } } } } }
+  /announcements/{id}/event:
+    post:
+      operationId: recordAnnouncementEvent
+      tags: [creator]
+      security: [{ BearerAuth: [] }]
+      parameters: [{ name: id, in: path, required: true, schema: { type: string, maxLength: 80 } }]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/AnnouncementEventInput" } } }
+      responses:
+        "200": { description: Deduplicated event recorded, content: { application/json: { schema: { type: object, required: [recorded], properties: { recorded: { type: boolean } } } } } }
+  /announcements/reset:
+    post:
+      operationId: resetAnnouncementDismissals
+      tags: [creator]
+      security: [{ BearerAuth: [] }]
+      responses:
+        "200": { description: Optional dismissals reset, content: { application/json: { schema: { type: object, required: [reset], properties: { reset: { type: boolean } } } } } }
+  /announcement-preferences:
+    get:
+      operationId: getAnnouncementPreferences
+      tags: [creator]
+      security: [{ BearerAuth: [] }]
+      responses:
+        "200": { description: Saved account preferences, content: { application/json: { schema: { $ref: "#/components/schemas/AnnouncementPreferences" } } } }
+    put:
+      operationId: updateAnnouncementPreferences
+      tags: [creator]
+      security: [{ BearerAuth: [] }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/AnnouncementPreferences" } } } }
+      responses:
+        "200": { description: Preferences saved, content: { application/json: { schema: { $ref: "#/components/schemas/AnnouncementPreferences" } } } }
+  /creator/admin/config:
+    get:
+      operationId: getCreatorProgramConfig
+      tags: [creator]
+      security: [{ BearerAuth: [] }]
+      responses:
+        "200": { description: Authorized administrative configuration, content: { application/json: { schema: { $ref: "#/components/schemas/CreatorProgramConfig" } } } }
+    put:
+      operationId: updateCreatorProgramConfig
+      tags: [creator]
+      security: [{ BearerAuth: [] }]
+      requestBody: { required: true, content: { application/json: { schema: { $ref: "#/components/schemas/CreatorProgramConfig" } } } }
+      responses:
+        "200": { description: Configuration updated, content: { application/json: { schema: { $ref: "#/components/schemas/CreatorProgramConfig" } } } }
+  /creator/admin/analytics:
+    get:
+      operationId: getCreatorProgramAnalytics
+      tags: [creator]
+      security: [{ BearerAuth: [] }]
+      responses:
+        "200": { description: Aggregate creator program usage, content: { application/json: { schema: { $ref: "#/components/schemas/CreatorProgramAnalytics" } } } }
+  /healthz:
+    get:
+      operationId: healthCheck
+      tags: [health]
+      summary: Health check
+      description: Returns server health status
+      responses:
+        "200":
+          description: Healthy
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/HealthStatus"
+  /account/professional:
+    get:
+      operationId: getAccountProfessional
+      security: [{ BearerAuth: [] }]
+      responses:
+        "200": { description: Own account tools and professional fields, content: { application/json: { schema: { $ref: "#/components/schemas/AccountProfessional" } } } }
+    put:
+      operationId: updateAccountProfessional
+      security: [{ BearerAuth: [] }]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/AccountProfessional" } } }
+      responses:
+        "200": { description: Classification saved without changing identity or privileges, content: { application/json: { schema: { $ref: "#/components/schemas/AccountProfessional" } } } }
+        "400": { description: Unsupported fields or invalid category }
+  /analytics/me:
+    get:
+      operationId: getOwnAnalytics
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - { name: mode, in: query, schema: { type: string, enum: [personal, creator, business] } }
+        - { name: from, in: query, schema: { type: string, format: date } }
+        - { name: to, in: query, schema: { type: string, format: date } }
+        - { name: metric, in: query, schema: { type: string, enum: [views, profileVisits, follows, engagement] } }
+        - { name: page, in: query, schema: { type: integer, minimum: 1, maximum: 500 } }
+        - { name: type, in: query, schema: { type: string, enum: [all, text, photo, video, story, blast] } }
+        - { name: sort, in: query, schema: { type: string, enum: [recent, views, engagement] } }
+      responses:
+        "200": { description: Measured owner-only analytics, content: { application/json: { schema: { $ref: "#/components/schemas/OwnAnalyticsReport" } } } }
+        "403": { description: Professional dashboard requires matching account classification }
+  /analytics/content/{id}:
+    get:
+      operationId: getOwnContentAnalytics
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string, format: uuid } }
+        - { name: from, in: query, schema: { type: string, format: date } }
+        - { name: to, in: query, schema: { type: string, format: date } }
+      responses:
+        "200": { description: Owner-only content insights, content: { application/json: { schema: { $ref: "#/components/schemas/ContentAnalytics" } } } }
+        "404": { description: Content missing or not owned }
+  /analytics/resources:
+    post:
+      operationId: registerOwnAnalyticsContent
+      security: [{ BearerAuth: [] }]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/AnalyticsResourceInput" } } }
+      responses:
+        "200": { description: Own metadata registered, content: { application/json: { schema: { $ref: "#/components/schemas/AnalyticsSessionIdentity" } } } }
+  /analytics/resources/{sourceId}:
+    delete:
+      operationId: removeOwnAnalyticsContent
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - { name: sourceId, in: path, required: true, schema: { type: string } }
+      responses:
+        "200": { description: Content excluded from future tracking }
+  /analytics/sessions:
+    post:
+      operationId: startAnalyticsView
+      security: [{ BearerAuth: [] }]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/AnalyticsStartInput" } } }
+      responses:
+        "200": { description: Server-timed view session; null for self-views, content: { application/json: { schema: { $ref: "#/components/schemas/AnalyticsSessionIdentity" } } } }
+  /analytics/sessions/{id}:
+    put:
+      operationId: updateAnalyticsPlayback
+      security: [{ BearerAuth: [] }]
+      parameters:
+        - { name: id, in: path, required: true, schema: { type: string, format: uuid } }
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/AnalyticsPlaybackInput" } } }
+      responses:
+        "200": { description: Validated playback updated }
+        "404": { description: Session not owned by actor or content no longer available }
+  /analytics/events:
+    post:
+      operationId: recordAnalyticsActivity
+      security: [{ BearerAuth: [] }]
+      requestBody:
+        required: true
+        content: { application/json: { schema: { $ref: "#/components/schemas/AnalyticsActivityInput" } } }
+      responses:
+        "200": { description: Activity recorded or deduplicated }
+        "400": { description: Unsupported event or client financial submission }
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+  schemas:
+    AccountProfessional:
+      type: object
+      additionalProperties: false
+      required: [accountType, creatorCategory, businessCategory, website, location, contact, showCategory, showContact]
+      properties:
+        accountType: { type: string, enum: [personal, creator, business] }
+        creatorCategory: { type: [string, "null"], enum: [Creator, Artist, Musician, Public Figure, Streamer, Writer, Athlete, Community Leader, null] }
+        businessCategory: { type: [string, "null"], enum: [Business, Local Service, Retail, Restaurant, Brand, Other, null] }
+        website: { type: string, maxLength: 500 }
+        location: { type: string, maxLength: 160 }
+        contact: { type: string, maxLength: 160 }
+        showCategory: { type: boolean }
+        showContact: { type: boolean }
+    AnalyticsResourceInput:
+      type: object
+      additionalProperties: false
+      required: [sourceId, kind, title, isPublic, durationMs, publishedAt]
+      properties:
+        sourceId: { type: string, minLength: 1, maxLength: 160 }
+        kind: { type: string, enum: [text, photo, video, story, blast] }
+        title: { type: string, maxLength: 100 }
+        isPublic: { type: boolean }
+        durationMs: { type: [integer, "null"], minimum: 1, maximum: 600000 }
+        publishedAt: { type: integer }
+    AnalyticsStartInput:
+      type: object
+      additionalProperties: false
+      required: [ownerId, sourceId, nonce, source]
+      properties:
+        ownerId: { type: string, format: uuid }
+        sourceId: { type: string, maxLength: 160 }
+        nonce: { type: string, format: uuid }
+        source: { type: string, enum: [feed, following, profile, search, content, blast, community, shared-link, direct] }
+    AnalyticsSessionIdentity:
+      type: object
+      required: [id]
+      properties:
+        id: { type: [string, "null"], format: uuid }
+    AnalyticsPlaybackInput:
+      type: object
+      additionalProperties: false
+      required: [visibleMs, watchedMs, progress, ended]
+      properties:
+        visibleMs: { type: integer, minimum: 0, maximum: 600000 }
+        watchedMs: { type: integer, minimum: 0, maximum: 600000 }
+        progress: { type: number, minimum: 0, maximum: 1 }
+        ended: { type: boolean }
+    AnalyticsActivityInput:
+      type: object
+      additionalProperties: false
+      required: [ownerId, sourceId, kind, source, nonce]
+      properties:
+        ownerId: { type: string, format: uuid }
+        sourceId: { type: [string, "null"], maxLength: 160 }
+        nonce: { type: string, format: uuid }
+        kind: { type: string, enum: [profile_visit, impression, like, comment, share, save, follow, unfollow] }
+        source: { type: string, enum: [feed, following, profile, search, content, blast, community, shared-link, direct] }
+    AnalyticsOverview:
+      type: object
+      additionalProperties: { type: [number, "null"] }
+    AnalyticsSeriesItem:
+      type: object
+      required: [day, views, profileVisits, follows, engagement]
+      properties:
+        day: { type: string, format: date }
+        views: { type: integer }
+        profileVisits: { type: integer }
+        follows: { type: integer }
+        engagement: { type: integer }
+    ContentAnalytics:
+      type: object
+      additionalProperties: true
+      required: [id, sourceId, title, kind, createdAt, views, uniqueViewers, retention, sources]
+      properties:
+        id: { type: string, format: uuid }
+        sourceId: { type: string }
+        title: { type: string }
+        kind: { type: string }
+        createdAt: { type: number }
+        views: { type: integer }
+        uniqueViewers: { type: integer }
+        retention: { type: array, items: { type: object, required: [percent, value], properties: { percent: { type: number }, value: { type: number } } } }
+        sources: { type: array, items: { type: object, required: [source, views], properties: { source: { type: string }, views: { type: integer } } } }
+    OwnAnalyticsReport:
+      type: object
+      required: [accountType, range, overview, comparison, series, content, hasMore, audience, growth, earnings, unavailable, definitions, trackingSince]
+      properties:
+        accountType: { type: string }
+        range: { type: object, required: [from, to], properties: { from: { type: string }, to: { type: string } } }
+        overview: { $ref: "#/components/schemas/AnalyticsOverview" }
+        comparison: { $ref: "#/components/schemas/AnalyticsOverview" }
+        series: { type: array, items: { $ref: "#/components/schemas/AnalyticsSeriesItem" } }
+        content: { type: array, items: { $ref: "#/components/schemas/ContentAnalytics" } }
+        hasMore: { type: boolean }
+        audience: { type: object, additionalProperties: true }
+        growth: { type: array, items: { type: object, required: [text, reason], properties: { text: { type: string }, reason: { type: string } } } }
+        earnings: { type: object, required: [available, reason], properties: { available: { type: boolean }, reason: { type: string } } }
+        unavailable: { type: array, items: { type: string } }
+        definitions: { type: object, additionalProperties: { type: string } }
+        trackingSince: { type: number }
+    ErrorResponse:
+      type: object
+      properties:
+        error: { type: string }
+      required: [error]
+    RegisterInput:
+      type: object
+      properties:
+        email: { type: string, format: email, maxLength: 254 }
+        username:
+          type: string
+          minLength: 3
+          maxLength: 24
+          pattern: "^[A-Za-z0-9_]+$"
+        displayName: { type: string, minLength: 1, maxLength: 60 }
+        password: { type: string, minLength: 8, maxLength: 128 }
+      required: [email, username, displayName, password]
+    LoginInput:
+      type: object
+      properties:
+        identifier: { type: string, minLength: 1, maxLength: 254 }
+        password: { type: string, minLength: 8, maxLength: 128 }
+      required: [identifier, password]
+    PublicProfile:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        username: { type: string, minLength: 3, maxLength: 24 }
+        displayName: { type: string, minLength: 1, maxLength: 60 }
+        joinedAt: { type: integer }
+      required: [id, username, displayName, joinedAt]
+    Account:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        username: { type: string, minLength: 3, maxLength: 24 }
+        displayName: { type: string, minLength: 1, maxLength: 60 }
+        email: { type: string, format: email, maxLength: 254 }
+        joinedAt: { type: integer }
+      required: [id, username, displayName, email, joinedAt]
+    AuthResponse:
+      type: object
+      properties:
+        accessToken: { type: string, minLength: 32 }
+        tokenType: { type: string, enum: [Bearer] }
+        expiresAt: { type: integer }
+        account: { $ref: "#/components/schemas/Account" }
+        authProvider: { type: string, enum: [password, cognito] }
+      required: [accessToken, tokenType, expiresAt, account]
+    CognitoConfiguration:
+      type: object
+      properties:
+        enabled: { type: boolean }
+        clientId: { type: string }
+        authorizationEndpoint: { type: string, format: uri }
+        logoutEndpoint: { type: string, format: uri }
+        scope: { type: string }
+        redirectUris:
+          type: array
+          items: { type: string, format: uri }
+      required: [enabled]
+    CognitoExchangeInput:
+      type: object
+      properties:
+        code: { type: string, minLength: 1, maxLength: 4096 }
+        codeVerifier: { type: string, minLength: 43, maxLength: 128, pattern: "^[A-Za-z0-9._~-]+$" }
+        nonce: { type: string, minLength: 32, maxLength: 128, pattern: "^[A-Za-z0-9_-]+$" }
+        redirectUri: { type: string, format: uri, maxLength: 2048 }
+        intent: { type: string, enum: [login, link] }
+      required: [code, codeVerifier, nonce, redirectUri, intent]
+    MyAccountResponse:
+      type: object
+      properties:
+        account: { $ref: "#/components/schemas/Account" }
+      required: [account]
+    LogoutResponse:
+      type: object
+      properties:
+        ok: { type: boolean, enum: [true] }
+      required: [ok]
+    PasswordChangeInput:
+      type: object
+      properties:
+        currentPassword: { type: string, minLength: 8, maxLength: 128 }
+        newPassword: { type: string, minLength: 8, maxLength: 128 }
+      required: [currentPassword, newPassword]
+    PasswordChangeResponse:
+      type: object
+      properties:
+        ok: { type: boolean, enum: [true] }
+      required: [ok]
+    SocialPost:
+      type: object
+      properties:
+        id: { type: string, format: uuid }
+        sourceId: { type: ["string", "null"] }
+        text: { type: string, minLength: 1, maxLength: 1000 }
+        createdAt: { type: integer }
+        author: { $ref: "#/components/schemas/PublicProfile" }
+        likeCount: { type: integer, minimum: 0 }
+        likedByMe: { type: boolean }
+      required: [id, sourceId, text, createdAt, author, likeCount, likedByMe]
+    FeedResponse:
+      type: object
+      properties:
+        posts:
+          type: array
+          items: { $ref: "#/components/schemas/SocialPost" }
+      required: [posts]
+    CreatePostInput:
+      type: object
+      properties:
+        text: { type: string, minLength: 1, maxLength: 1000 }
+      required: [text]
+    PostImportItem:
+      type: object
+      properties:
+        sourceId: { type: string, minLength: 1, maxLength: 128 }
+        text: { type: string, minLength: 1, maxLength: 1000 }
+        createdAt: { type: integer, minimum: 0, maximum: 8640000000000000 }
+      required: [sourceId, text, createdAt]
+    PostImportInput:
+      type: object
+      properties:
+        posts:
+          type: array
+          minItems: 1
+          maxItems: 50
+          items: { $ref: "#/components/schemas/PostImportItem" }
+      required: [posts]
+    PostImportResult:
+      type: object
+      properties:
+        sourceId: { type: string }
+        postId: { type: string, format: uuid }
+        outcome: { type: string, enum: [imported, already-imported, conflict] }
+      required: [sourceId, postId, outcome]
+    PostImportResponse:
+      type: object
+      properties:
+        results:
+          type: array
+          items: { $ref: "#/components/schemas/PostImportResult" }
+      required: [results]
+    PostCreationResult:
+      type: object
+      properties:
+        post: { $ref: "#/components/schemas/SocialPost" }
+      required: [post]
+    LikeResponse:
+      type: object
+      properties:
+        liked: { type: boolean }
+        likeCount: { type: integer, minimum: 0 }
+      required: [liked, likeCount]
+    UserSearchResults:
+      type: object
+      properties:
+        profiles:
+          type: array
+          items: { $ref: "#/components/schemas/PublicProfile" }
+      required: [profiles]
+    ProfileResponse:
+      type: object
+      properties:
+        profile: { $ref: "#/components/schemas/PublicProfile" }
+        posts:
+          type: array
+          items: { $ref: "#/components/schemas/SocialPost" }
+        postCount: { type: integer, minimum: 0 }
+      required: [profile, posts, postCount]
+    AnnouncementDismissInput:
+      type: object
+      additionalProperties: false
+      required: [choice]
+      properties:
+        choice: { type: string, enum: [not-now, never] }
+    AnnouncementEventInput:
+      type: object
+      additionalProperties: false
+      required: [event]
+      properties:
+        event: { type: string, enum: [shown, action] }
+    CreatorRequirement:
+      type: object
+      required: [key, label, current, target, met]
+      properties:
+        key: { type: string }
+        label: { type: string }
+        current: { type: number }
+        target: { type: number }
+        met: { type: boolean }
+    StoreMembership:
+      type: object
+      required: [active, store, expiresAt]
+      properties:
+        active: { type: boolean }
+        store: { type: [string, "null"], enum: [apple, google, null] }
+        expiresAt: { type: [number, "null"] }
+    CreatorDashboard:
+      type: object
+      required: [status, level, score, eligible, approvedAt, membershipRequired, requirements, stats, history, milestones, membership, creatorPayoutsEnabled, isAdmin]
+      properties:
+        contentBreakdown:
+          type: object
+          required: [text, photos, videos, stories, communityPosts]
+          properties:
+            text: { type: integer }
+            photos: { type: integer }
+            videos: { type: integer }
+            stories: { type: integer }
+            communityPosts: { type: integer }
+        status: { type: string, enum: [rising, emerging, eligible, approved, membership-required, restricted] }
+        level: { type: string }
+        score: { type: integer }
+        eligible: { type: boolean }
+        approvedAt: { type: [number, "null"] }
+        membershipRequired: { type: boolean }
+        requirements: { type: array, items: { $ref: "#/components/schemas/CreatorRequirement" } }
+        stats:
+          type: object
+          required: [accountAgeDays, profileCompletion, originalPosts, activeDays, engagementReceived, communityInteractions]
+          properties:
+            accountAgeDays: { type: integer }
+            profileCompletion: { type: integer }
+            originalPosts: { type: integer }
+            activeDays: { type: integer }
+            engagementReceived: { type: integer }
+            communityInteractions: { type: integer }
+        history:
+          type: array
+          items: { type: object, required: [status, at, reason], properties: { status: { type: string }, at: { type: number }, reason: { type: string } } }
+        milestones:
+          type: array
+          items: { type: object, required: [id, title, reached], properties: { id: { type: string }, title: { type: string }, reached: { type: boolean } } }
+        membership: { $ref: "#/components/schemas/StoreMembership" }
+        creatorPayoutsEnabled: { type: boolean }
+        isAdmin: { type: boolean }
+    BlueBadgeMembership:
+      allOf:
+        - { $ref: "#/components/schemas/StoreMembership" }
+        - type: object
+          required: [interested, billingEnabled, standardPriceCents, trialMonths, returningPriceCents, currency, benefits, offer, creatorMembershipRequired, status, autoRenews, canceledAt, purchaseSupported, restorationSupported, distribution, promotionConfig]
+          properties:
+            status: { type: string, enum: [none, pending, active, canceled, expired, revoked, billing-issue] }
+            autoRenews: { type: [boolean, "null"] }
+            canceledAt: { type: [integer, "null"] }
+            purchaseSupported: { type: boolean }
+            restorationSupported: { type: boolean }
+            distribution: { $ref: "#/components/schemas/BadgeDistribution" }
+            promotionConfig: { $ref: "#/components/schemas/BadgePromotions" }
+            interested: { type: boolean }
+            billingEnabled: { type: boolean }
+            standardPriceCents: { type: integer }
+            trialMonths: { type: integer }
+            returningPriceCents: { type: integer }
+            currency: { type: string }
+            benefits: { type: array, items: { type: string } }
+            offer:
+              type: object
+              required: [eligible, kind, available]
+              properties:
+                eligible: { type: boolean }
+                kind: { type: string, enum: [introductory, returning, standard] }
+                available: { type: boolean }
+            creatorMembershipRequired: { type: boolean }
+    AnnouncementPreferences:
+      type: object
+      additionalProperties: false
+      required: [features, promotions, creators, communities]
+      properties:
+        features: { type: boolean }
+        promotions: { type: boolean }
+        creators: { type: boolean }
+        communities: { type: boolean }
+    AnnouncementCampaign:
+      type: object
+      additionalProperties: false
+      required: [id, title, description, category, primaryLabel, primaryRoute, optional, enabled, inactiveDays, startAt, endAt, cooldownHours]
+      properties:
+        id: { type: string, minLength: 1, maxLength: 80, pattern: "^[a-z0-9-]+$" }
+        title: { type: string, minLength: 1, maxLength: 100 }
+        description: { type: string, minLength: 1, maxLength: 600 }
+        category: { type: string, enum: [welcome, feature, creator, community, membership, returning, safety, service] }
+        primaryLabel: { type: string, minLength: 1, maxLength: 60 }
+        primaryRoute: { type: string, enum: [creator-center, blue-badge, announcements, updates, communities, blast, settings] }
+        optional: { type: boolean }
+        enabled: { type: boolean }
+        inactiveDays: { type: integer, minimum: 0, maximum: 365 }
+        startAt: { type: [number, "null"] }
+        endAt: { type: [number, "null"] }
+        cooldownHours: { type: integer, minimum: 1, maximum: 8760 }
+    CreatorProgramAnalytics:
+      type: object
+      required: [evaluatedAccounts, approvedCreators, interestedAccounts, activeMemberships, announcementViews, announcementActions]
+      properties:
+        evaluatedAccounts: { type: integer, minimum: 0 }
+        approvedCreators: { type: integer, minimum: 0 }
+        interestedAccounts: { type: integer, minimum: 0 }
+        activeMemberships: { type: integer, minimum: 0 }
+        announcementViews: { type: integer, minimum: 0 }
+        announcementActions: { type: integer, minimum: 0 }
+    BadgeDistribution:
+      type: object
+      additionalProperties: false
+      required: [iphoneUrl, androidUrl, openUrl]
+      properties:
+        iphoneUrl: { type: [string, "null"], maxLength: 500 }
+        androidUrl: { type: [string, "null"], maxLength: 500 }
+        openUrl: { type: [string, "null"], maxLength: 500 }
+    CreatorMediaUploadInput:
+      type: object
+      additionalProperties: false
+      required: [contentType, size]
+      properties:
+        contentType: { type: string, enum: [image/jpeg, image/png, image/webp, image/gif, video/mp4, video/webm] }
+        size: { type: integer, minimum: 128, maximum: 26214400 }
+    CreatorContentInput:
+      type: object
+      additionalProperties: false
+      required: [sourceId, surface, body, mediaIds]
+      properties:
+        sourceId: { type: string, minLength: 1, maxLength: 120 }
+        surface: { type: string, enum: [post, story, community] }
+        body: { type: string, maxLength: 5000 }
+        mediaIds: { type: array, maxItems: 10, items: { type: string, format: uuid } }
+    CloudComment:
+      type: object
+      required: [id, body, createdAt, author]
+      properties:
+        id: { type: string, format: uuid }
+        body: { type: string }
+        createdAt: { type: number }
+        author:
+          type: object
+          required: [id, username, displayName]
+          properties:
+            id: { type: string, format: uuid }
+            username: { type: string }
+            displayName: { type: string }
+    CloudCommentInput:
+      type: object
+      additionalProperties: false
+      required: [body]
+      properties:
+        body: { type: string, minLength: 1, maxLength: 1000 }
+    BadgePromotions:
+      type: object
+      additionalProperties: false
+      required: [introductoryEnabled, returningEnabled, returningInactiveDays, returningOfferDays]
+      properties:
+        introductoryEnabled: { type: boolean }
+        returningEnabled: { type: boolean }
+        returningInactiveDays: { type: integer, minimum: 1, maximum: 365 }
+        returningOfferDays: { type: integer, minimum: 1, maximum: 90 }
+    CreatorProgramConfig:
+      type: object
+      additionalProperties: false
+      required: [flags, thresholds, campaigns, pricing, promotions, distribution]
+      properties:
+        promotions: { $ref: "#/components/schemas/BadgePromotions" }
+        distribution: { $ref: "#/components/schemas/BadgeDistribution" }
+        flags:
+          type: object
+          additionalProperties: false
+          required: [creatorCenter, automaticApproval, blueBadge, announcements, promotions, milestones]
+          properties:
+            creatorCenter: { type: boolean }
+            automaticApproval: { type: boolean }
+            blueBadge: { type: boolean }
+            announcements: { type: boolean }
+            promotions: { type: boolean }
+            milestones: { type: boolean }
+        thresholds:
+          type: object
+          additionalProperties: false
+          required: [accountAgeDays, originalPosts, activeDays, engagementReceived, communityInteractions]
+          properties:
+            accountAgeDays: { type: integer, minimum: 1, maximum: 365 }
+            originalPosts: { type: integer, minimum: 1, maximum: 10000 }
+            activeDays: { type: integer, minimum: 1, maximum: 14 }
+            engagementReceived: { type: integer, minimum: 1, maximum: 100000 }
+            communityInteractions: { type: integer, minimum: 1, maximum: 10000 }
+        campaigns: { type: array, maxItems: 30, items: { $ref: "#/components/schemas/AnnouncementCampaign" } }
+        pricing:
+          type: object
+          additionalProperties: false
+          required: [standardPriceCents, trialMonths, returningPriceCents, currency]
+          properties:
+            standardPriceCents: { type: integer, minimum: 1, maximum: 100000 }
+            trialMonths: { type: integer, minimum: 0, maximum: 12 }
+            returningPriceCents: { type: integer, minimum: 1, maximum: 100000 }
+            currency: { type: string, enum: [USD] }
+    HealthStatus:
+      type: object
+      properties:
+        status:
+          type: string
+      required:
+        - status
+

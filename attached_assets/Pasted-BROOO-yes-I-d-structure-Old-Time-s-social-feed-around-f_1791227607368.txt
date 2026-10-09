@@ -1,0 +1,329 @@
+BROOO 😭🔥 yes. I’d structure Old Time’s social feed around four distinct relationships/feeds so each one has a clear purpose instead of everything being mashed together.
+
+OLD TIME SOCIAL SYSTEM
+
+Feed	What it means	Who appears
+Close Friends	Your inner circle	People you specifically add
+Following	Creators/people you chose to follow	Accounts you follow
+For You	Personalized discovery	Anyone whose public content the algorithm thinks you’ll enjoy
+Discover	Explore what’s happening publicly	Trending, categories, communities, new creators
+
+1. 👥 Close Friends
+
+This should feel private and personal, not like another algorithmic feed.
+
+You manually add people to Close Friends.
+
+When someone posts to Close Friends, only those people can see it.
+
+Behavior:
+
+Post → Close Friends → only selected people
+
+You could also give Close Friends special treatment:
+
+* Close Friends Stories
+* Close Friends posts
+* private reactions
+* replies
+* disappearing content
+* optional notifications
+* Close Friends badge/ring
+* separate Close Friends section at the top
+
+And importantly:
+
+Being someone’s Close Friend does NOT automatically mean you follow them publicly.
+
+That distinction is 🔥.
+
+⸻
+
+2. ❤️ Following
+
+Following is your intentional public feed.
+
+You follow:
+
+@james
+@miamifood
+@oldtimecars
+@nursejess
+
+Their public posts appear here.
+
+If they post publicly:
+
+Creator → Following
+
+No algorithm should completely destroy this feed.
+
+You followed them because you want their content.
+
+But you can still lightly rank it by:
+
+* newest
+* relevance
+* engagement
+* whether you’ve interacted with them recently
+
+I’d actually give users a toggle:
+
+Following
+
+* Latest
+* Recommended
+
+So people who want chronological content can have it.
+
+⸻
+
+3. 🧠 For You
+
+This is where Old Time becomes powerful.
+
+For You doesn’t care whether you follow someone.
+
+It asks:
+
+“What does this person probably want to see right now?”
+
+Someone could have:
+
+120 followers
+
+and their post could still reach:
+
+100,000 people.
+
+The system looks at things like:
+
+* watch time
+* completion rate
+* likes
+* comments
+* shares
+* saves
+* profile visits
+* follows generated
+* skips
+* hides
+* reports
+* previous interests
+* topics you’ve interacted with
+
+Then it constantly adjusts.
+
+Example:
+
+You watch five Miami food videos.
+
+Old Time learns:
+
+Miami + food + restaurants = strong interest.
+
+Now a creator you’ve never heard of posts:
+
+“Hidden Haitian restaurant in Miami”
+
+🔥
+
+That post becomes a candidate for your For You feed.
+
+You watch it all.
+
+Maybe save it.
+
+Maybe follow the creator.
+
+Now Old Time has even more information.
+
+⸻
+
+4. 🔎 Discover
+
+I’d make Discover different from For You.
+
+For You = “Here is what WE think YOU will like.”
+
+Discover = “Here is what’s happening RIGHT NOW.”
+
+Discover could contain:
+
+Trending
+
+* Viral posts
+* Fast-growing creators
+* Popular discussions
+
+Categories
+
+* Music
+* Food
+* Sports
+* Gaming
+* Fashion
+* Cars
+* Nursing
+* College
+* Travel
+* Comedy
+* Beauty
+* Technology
+
+Communities
+
+* Miami
+* Florida
+* NYC
+* Haitian
+* Caribbean
+* College students
+* Nurses
+* Trucking
+* etc.
+
+New & Rising
+
+* creators gaining momentum
+* posts with unusual engagement
+* new accounts worth discovering
+
+So Discover becomes the public window into Old Time.
+
+⸻
+
+🔥 The really important relationship system
+
+I’d make the relationships independent:
+
+Friend
+
+You both accept each other.
+
+Following
+
+You follow someone publicly.
+
+Close Friend
+
+You specifically add them to your private circle.
+
+And these can overlap.
+
+For example:
+
+John
+
+Friend: ✅
+Following: ✅
+Close Friend: ❌
+
+Sarah
+
+Friend: ❌
+Following: ✅
+Close Friend: ❌
+
+Mike
+
+Friend: ✅
+Following: ❌
+Close Friend: ✅
+
+That gives Old Time much more flexibility than simply having Friends vs Followers.
+
+⸻
+
+And then the content visibility
+
+Every post gets a visibility choice:
+
+🔒 Private
+
+Only you.
+
+👥 Friends
+
+Your friends.
+
+💚 Close Friends
+
+Only your Close Friends.
+
+👤 Followers
+
+Your followers.
+
+🌎 Public
+
+Anyone can potentially discover it.
+
+And Public is the important one.
+
+Public content can flow:
+
+Creator posts
+
+↓
+
+Followers
+
+↓
+
+For You candidates
+
+↓
+
+Discover
+
+↓
+
+Trending
+
+↓
+
+New audiences
+
+↓
+
+New followers
+
+↓
+
+More distribution
+
+That’s the growth loop.
+
+⸻
+
+🧠 One more thing I’d steal from Snapchat’s philosophy
+
+Don’t make the algorithm simply say:
+
+“You watched cars, therefore show 100 more car videos.”
+
+That’s boring.
+
+Instead:
+
+Primary interest: Cars
+Secondary: Miami
+Behavior: Comedy
+Creator affinity: @xyz
+Current trend: Hurricane prep
+Freshness: New
+
+Then you might get:
+
+🚗 Miami car meet
+😂 Funny mechanic video
+🔥 New Lamborghini creator
+📍 Cars happening near you
+🎥 Creator you follow
+
+That makes For You feel alive instead of repetitive.
+
+And I would keep Close Friends completely protected from this algorithmic discovery logic. If your friend posts something to your Close Friends, it should feel like they sent it to you, not like Old Time decided you might enjoy it.
+
+That distinction could make Old Time feel way more human. 🔥

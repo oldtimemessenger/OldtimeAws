@@ -1,0 +1,855 @@
+BUILD OLD TIME ROOMS
+
+Build the complete Old Time Rooms feature as a production-ready live social room system.
+
+This is NOT a normal phone call, NOT a FaceTime-style call, and NOT a six-person group chat.
+
+The concept is:
+
+A live social room where up to 6 people can be on stage speaking/video while an audience of as many people as the infrastructure can support can enter, listen, chat, react, request to speak, or leave whenever they want.
+
+The room should feel like walking into a live conversation.
+
+⸻
+
+1. CORE RULE — DO NOT GET THIS WRONG
+
+There are TWO completely separate concepts:
+
+ACTIVE SPEAKERS
+
+Maximum: 6 total
+
+This includes the host.
+
+Example:
+
+* 1 Host
+* 5 additional speakers
+* 6 active speakers total
+
+LISTENERS
+
+There is NO hard 6-person listener limit.
+
+The room can have:
+
+* 10 listeners
+* 100 listeners
+* 1,000 listeners
+* 10,000+ listeners
+
+depending on infrastructure capacity.
+
+Therefore:
+
+6 speakers + 4,000 listeners = VALID
+
+The application must NEVER treat 6 as the maximum number of people in the room.
+
+The six-person limit applies ONLY to users actively transmitting microphone/camera media.
+
+Track these separately:
+
+totalParticipants
+activeSpeakers
+
+Example UI:
+
+🔴 LIVE
+6 speakers
+4,327 listening
+
+If another listener joins:
+
+6 speakers
+4,328 listening
+
+If a speaker leaves:
+
+5 speakers
+4,328 listening
+
+The available speaker position can then be filled by an approved listener.
+
+⸻
+
+2. TECHNOLOGY
+
+Use WebRTC for real-time audio/video.
+
+Do NOT use:
+
+* Twilio Video
+* Agora
+* Daily
+* Zoom SDK
+* Other paid third-party real-time communication APIs
+
+The goal is to own the communication architecture.
+
+Use:
+
+WebRTC
+
+For:
+
+* Microphone
+* Camera
+* Real-time audio
+* Real-time video
+
+Backend / WebSocket signaling
+
+For:
+
+* Creating rooms
+* Joining rooms
+* WebRTC signaling
+* Participant presence
+* Speaker requests
+* Host/moderator permissions
+* Room state
+* Chat
+* Reactions
+* Participant updates
+
+STUN
+
+For WebRTC connection establishment.
+
+TURN
+
+For users who cannot establish a direct WebRTC connection because of restrictive NAT/firewalls.
+
+SFU
+
+Design the system so an SFU/media server can efficiently distribute the six active speakers’ media to large audiences.
+
+Important:
+
+The SFU is still part of the WebRTC architecture.
+
+It is NOT a replacement for WebRTC.
+
+The architecture should be:
+
+ACTIVE SPEAKERS
+      │
+      │ WebRTC
+      ↓
+     SFU
+      │
+      │
+      ├────────→ Listener
+      ├────────→ Listener
+      ├────────→ Listener
+      ├────────→ Listener
+      └────────→ thousands of listeners
+
+Do not create a separate media upload/transmission path from every listener.
+
+Listeners primarily receive media.
+
+⸻
+
+3. HOSTING A ROOM
+
+Add:
+
++ Host a Room
+
+When tapped, show:
+
+Room name
+
+Required.
+
+Description
+
+Optional.
+
+Category
+
+Examples:
+
+* Music
+* Sports
+* School
+* Fitness
+* Gaming
+* News
+* City
+* General
+* Community
+
+Who can join?
+
+* Everyone
+* Friends
+* Community members
+* Invite only
+
+Room format
+
+* Audio
+* Video
+* Audio + Video
+
+Then:
+
+START ROOM
+
+The creator becomes the Host automatically.
+
+⸻
+
+4. ROOM DISCOVERY
+
+Create a Rooms discovery experience.
+
+Show:
+
+🔴 LIVE NOW
+
+Example:
+
+Late Night Conversations
+6 speakers · 3,842 listening
+
+NBA Trade Talk
+5 speakers · 1,204 listening
+
+Miami After Dark
+4 speakers · 867 listening
+
+Nursing Study Room
+2 speakers · 86 listening
+
+Users tap a room and immediately enter as a listener.
+
+They do NOT need an invitation for public rooms.
+
+⸻
+
+5. ENTERING A ROOM
+
+When a normal user enters a public room:
+
+They automatically enter as:
+
+LISTENER
+
+They should NOT automatically get microphone or camera permissions.
+
+They can immediately:
+
+* Listen
+* Watch
+* Read chat
+* Send chat messages
+* React
+* Request to speak
+* Leave
+
+The user does not have to become a speaker to participate socially.
+
+⸻
+
+6. SPEAKERS
+
+Maximum:
+
+6 active speakers total.
+
+The Host counts as one speaker.
+
+Example:
+
+HOST
+Jay
+SPEAKERS
+Marcus
+Sarah
+Chris
+Alex
+Taylor
+
+That equals:
+
+6 active speakers
+
+No seventh speaker can be active.
+
+If a seventh user requests to speak while all six positions are occupied, show:
+
+All 6 speaker spots are currently occupied.
+
+They remain a listener.
+
+When a speaker leaves, a speaker position becomes available.
+
+⸻
+
+7. REQUEST TO SPEAK
+
+Every listener has:
+
+🙋 Request to Speak
+
+When tapped:
+
+Host/moderators receive:
+
+Chris wants to speak
+
+Buttons:
+
+Accept
+
+Decline
+
+If accepted:
+
+Chris becomes an active speaker.
+
+If six speaker slots are already occupied, the request cannot be accepted until a slot opens.
+
+⸻
+
+8. HOST CONTROLS
+
+The Host can:
+
+* Mute themselves
+* Turn camera on/off
+* Accept speaker requests
+* Decline speaker requests
+* Mute speakers
+* Remove speakers
+* Remove listeners
+* Kick users
+* Block users
+* Create moderators
+* Remove moderators
+* End the room
+
+The Host is the only person who can permanently end the room.
+
+⸻
+
+9. MODERATORS
+
+The Host can promote users to Moderator.
+
+Moderators can:
+
+* Accept/decline speaker requests
+* Mute speakers
+* Remove speakers
+* Remove listeners
+* Kick users
+* Moderate chat
+* Delete chat messages
+* Block users
+
+Moderators CANNOT:
+
+* Remove the Host
+* End the entire room
+* Transfer ownership unless a future host-transfer system is explicitly implemented
+
+⸻
+
+10. LIVE CHAT
+
+Every room has a real-time chat.
+
+Example:
+
+Jay:
+This song is crazy 😂
+Marcus:
+Where did you find this?
+Sarah:
+I'm joining from Miami
+
+Chat must update instantly without refreshing.
+
+Host/moderators can:
+
+* Delete messages
+* Mute users
+* Remove users
+* Block users
+
+Chat is separate from the media stream but belongs to the same room.
+
+⸻
+
+11. REACTIONS
+
+Listeners should be able to react without becoming speakers.
+
+Provide reactions such as:
+
+❤️
+😂
+🔥
+👏
+😳
+👀
+
+Reactions should appear temporarily.
+
+Do not store every reaction permanently unless needed.
+
+⸻
+
+12. ROOM UI
+
+Top:
+
+🔴 LIVE
+Room Name
+6 speakers · 3,842 listening
+
+Then:
+
+HOST
+
+Host avatar/video
+
+Jay
+
+Host
+
+SPEAKERS
+
+Display up to five additional speakers.
+
+For audio rooms:
+
+* Avatar
+* Name
+* Microphone state
+* Speaking indicator
+
+For video rooms:
+
+* Video tiles
+* Avatar fallback
+* Name
+* Microphone state
+
+Then:
+
+LIVE CHAT
+
+Scrollable live messages.
+
+Bottom:
+
+💬 Chat
+🙋 Request to Speak
+❤️ React
+🔊 Audio
+🚪 Leave
+
+Host/moderator controls should only appear for authorized users.
+
+⸻
+
+13. LEAVING
+
+A listener can tap:
+
+Leave Room
+
+They immediately leave.
+
+They can return later while the room is still active.
+
+If a speaker leaves:
+
+* Remove them from active speakers
+* Free the speaker slot
+* Update speaker count
+* Allow another approved listener to become a speaker
+
+Do not end the room simply because ordinary listeners leave.
+
+⸻
+
+14. HOST DISCONNECT
+
+If the Host temporarily loses internet:
+
+DO NOT immediately destroy the room.
+
+Allow a reconnection period.
+
+If the Host reconnects:
+
+Restore the session.
+
+If the Host permanently leaves unexpectedly:
+
+Use a safe room recovery/host-transfer mechanism if moderators exist.
+
+Do not allow a temporary network interruption to destroy a room with hundreds or thousands of listeners.
+
+⸻
+
+15. ENDING A ROOM
+
+Host taps:
+
+End Room
+
+Show confirmation:
+
+End this room for everyone?
+
+END ROOM
+
+CANCEL
+
+When confirmed:
+
+* Stop the live session
+* Disconnect participants
+* Mark room as ended
+* Remove it from LIVE NOW
+* Show users:
+
+Room ended
+
+Do not automatically record or store the audio/video.
+
+⸻
+
+16. NO AUTOMATIC RECORDING
+
+Live media is ephemeral.
+
+Do NOT automatically save:
+
+* Audio
+* Video
+* Microphone recordings
+* Camera recordings
+
+When the room ends, the live media session ends.
+
+Only store normal room metadata required by the application.
+
+A future recording feature can be added separately.
+
+⸻
+
+17. COMMUNITY INTEGRATION
+
+Rooms should work with Old Time Communities.
+
+Example:
+
+🏀 Basketball
+
+Posts
+Threads
+Videos
+Chat
+Rooms
+
+Live:
+
+🔴 NBA Trade Talk
+6 speakers · 243 listening
+
+🔴 Miami Pickup Basketball
+3 speakers · 31 listening
+
+Users can discover community rooms directly from the community.
+
+⸻
+
+18. FOR YOU INTEGRATION
+
+The For You feed can surface active rooms.
+
+Example:
+
+🔴 LIVE NOW
+
+People you may know are talking about:
+
+Late Night Conversations
+4 speakers · 328 listening
+
+Tap → enter room.
+
+This should make Old Time feel active and alive.
+
+⸻
+
+19. ROOM PRESENCE
+
+Update counts in real time.
+
+Example:
+
+Initial:
+
+6 speakers
+500 listening
+
+New listener joins:
+
+6 speakers
+501 listening
+
+Speaker leaves:
+
+5 speakers
+501 listening
+
+Approved listener becomes speaker:
+
+6 speakers
+500 listening
+
+Make sure the backend and frontend maintain these as separate values.
+
+⸻
+
+20. MULTIPLE ROOMS
+
+Users should be able to host different rooms simultaneously.
+
+Example:
+
+NBA Talk
+6 speakers
+2,341 listening
+Music Discussion
+3 speakers
+812 listening
+Miami Night Talk
+5 speakers
+421 listening
+
+Do not build the system around only one global room.
+
+Each room has its own:
+
+* Room ID
+* Host
+* Moderators
+* Speakers
+* Listeners
+* Chat
+* Reactions
+* Permissions
+* WebRTC session
+* Lifecycle
+
+⸻
+
+21. SCALABILITY
+
+The architecture must be designed around:
+
+Six active media producers
+
+NOT:
+
+Six total participants.
+
+The goal is:
+
+                 OLD TIME ROOM
+                  6 SPEAKERS
+                     │
+                     ↓
+                  WebRTC
+                     │
+                     ↓
+                    SFU
+                     │
+       ┌─────────────┼─────────────┐
+       ↓             ↓             ↓
+    Listener      Listener      Listener
+       ↓             ↓             ↓
+      ...           ...           ...
+                    ↓
+             Large audience
+
+Do NOT establish six separate outbound media streams from every speaker to every listener.
+
+Use an SFU architecture for efficient distribution when room size requires it.
+
+Build the media layer so it can scale independently from the room/chat/database layer.
+
+⸻
+
+22. IMPORTANT: DO NOT FAKE THIS
+
+Do NOT implement:
+
+* Fake listener counts
+* Fake speaker counts
+* Fake live chat
+* Fake video
+* Fake microphone state
+* Fake room presence
+* Fake WebRTC connections
+* Placeholder “live” rooms that aren’t actually live
+
+Everything displayed as live must come from real room state.
+
+Every button must perform its actual action.
+
+⸻
+
+23. SECURITY AND PERMISSIONS
+
+Never trust frontend permission checks alone.
+
+The backend must validate:
+
+* Who owns the room
+* Who is moderator
+* Who is speaker
+* Whether six speaker slots are occupied
+* Whether the user can join
+* Whether the user was kicked
+* Whether the user is blocked
+* Whether the room is still active
+
+A malicious client must not be able to promote itself to speaker by changing frontend state.
+
+⸻
+
+24. MOBILE-FIRST
+
+Old Time is mobile-first.
+
+Design Rooms for:
+
+* iPhone Safari
+* iPhone Chrome
+* Android Chrome
+* Mobile browsers
+* Touch interaction
+* Safe-area insets
+* Portrait orientation
+* Landscape video when appropriate
+
+The interface should feel like a native social app even though the underlying application is web-based.
+
+⸻
+
+25. FINAL USER EXPERIENCE
+
+A user opens Old Time.
+
+They see:
+
+🔴 ROOMS LIVE NOW
+
+Late Night Conversations
+🎙️ 6 speakers · 3,842 listening
+
+NBA Trade Talk
+📹 6 speakers · 8,921 watching
+
+Miami After Dark
+🎙️ 4 speakers · 1,204 listening
+
+Nursing Study Room
+🎙️ 2 speakers · 86 listening
+
+They tap NBA Trade Talk.
+
+They enter immediately as a listener.
+
+They can:
+
+🎧 Listen
+💬 Chat
+❤️ React
+🙋 Request to speak
+🚪 Leave
+
+They don’t like the conversation?
+
+They leave.
+
+They want to participate?
+
+They request to speak.
+
+The Host accepts them.
+
+They become speaker #6.
+
+Another listener can still join the room while all six speakers are active.
+
+That is the core Old Time Rooms experience.
+
+⸻
+
+26. REQUIRED QA
+
+Test the feature end-to-end as a real user.
+
+Test:
+
+* Creating rooms
+* Joining rooms
+* Leaving rooms
+* Rejoining
+* Public rooms
+* Private rooms
+* Invite-only rooms
+* Community rooms
+* Multiple simultaneous rooms
+* One listener
+* Many listeners
+* Six speakers
+* Seventh speaker request
+* Speaker leaving
+* New speaker replacing them
+* Host controls
+* Moderator controls
+* Live chat
+* Chat moderation
+* Reactions
+* Microphone permissions
+* Camera permissions
+* Mute/unmute
+* Video on/off
+* Network interruption
+* Host reconnect
+* Host ending room
+* Room cleanup
+* Room discovery
+* For You integration
+* Community integration
+* iOS Safari
+* Android Chrome
+
+Do not consider the feature complete until the complete flow works on a real mobile browser.
+
+FINAL RULE
+
+Remember this distinction throughout the entire implementation:
+
+6 PEOPLE ON STAGE. NOT 6 PEOPLE IN THE ROOM.
+
+The room can have six active speakers and an audience as large as the infrastructure can support.
+
+The audience can listen, watch, chat, react, request to speak, or leave whenever they want.
+
+Build Old Time Rooms around that concept.

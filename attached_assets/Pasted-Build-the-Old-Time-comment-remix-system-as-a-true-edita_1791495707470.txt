@@ -1,0 +1,263 @@
+Build the Old Time comment remix system as a true editable canvas, inspired by TikTok’s video-comment sticker concept but designed to be more flexible and polished.
+
+CORE IDEA:
+
+When a user chooses a comment and taps “Remix” or “Reply with video”, DO NOT simply paste a screenshot of the comment onto the video.
+
+Create the comment as a real interactive overlay object.
+
+The comment should visually look like an actual Old Time comment card, including:
+
+* User avatar
+* Username
+* Comment text
+* Optional reply/context indicator
+* Like/reaction indicator where appropriate
+* Clean Old Time styling
+* Proper typography and spacing
+* Rounded card/background treatment
+
+THE REMIX CANVAS:
+
+After selecting the comment, open the normal video/photo creation editor.
+
+The selected comment becomes an editable canvas layer.
+
+The user must be able to:
+
+1. Drag the comment anywhere on the screen.
+2. Pinch with two fingers to make it larger or smaller.
+3. Rotate it with two fingers.
+4. Move it freely with no forced grid.
+5. Resize it without destroying the comment’s internal layout.
+6. Add their own text above, below, or beside the comment.
+7. Add additional stickers, drawings, emojis, GIFs, images, or other remix elements.
+8. Record a video underneath the comment.
+9. Upload an existing video/photo instead of recording.
+10. Control the comment’s start/end duration on the timeline.
+11. Duplicate the comment layer if appropriate.
+12. Delete the comment layer by dragging it to a trash/drop zone.
+13. Preview everything exactly as it will appear when posted.
+
+IMPORTANT:
+
+The comment must NOT look like a random rectangular screenshot pasted onto the video.
+
+It needs to behave like a native design element.
+
+The user should feel like:
+
+“I grabbed this person’s comment and put myself into the conversation.”
+
+For example:
+
+Original comment:
+“Bro how did you even make this 😂”
+
+The user can place that comment near themselves in the video, then add:
+
+“Watch this 👀”
+
+or
+
+“Let me show you.”
+
+The final post becomes a visual conversation/remix.
+
+FREEFORM PLACEMENT:
+
+Do not lock the comment to the top or bottom.
+
+Allow true freehand placement anywhere inside the safe video area.
+
+The user should be able to make the comment:
+
+* tiny
+* medium
+* large
+* angled
+* partially overlapping the subject
+* positioned next to their own text
+
+Keep the interaction smooth and native on mobile.
+
+EDITABLE TEXT:
+
+The user’s own text must be completely independent from the original comment.
+
+They should be able to add multiple text layers and independently:
+
+* move
+* resize
+* rotate
+* change font
+* change alignment
+* change background
+* change color
+* adjust opacity
+* adjust timing
+
+REMIX TYPES:
+
+Support multiple remix modes:
+
+A. VIDEO REMIX
+User records/uploads a video and places the comment over it.
+
+B. PHOTO REMIX
+User uploads a photo and places the comment over it.
+
+C. STATUS REMIX
+User creates a temporary status/story and places the comment anywhere on the status canvas.
+
+D. FULL REMIX
+User can combine:
+video/photo + original comment + their own text + stickers + drawings + additional media.
+
+IMPORTANT PRODUCT BEHAVIOR:
+
+When someone views the finished remix, tapping the original comment should open the original comment/context.
+
+Preserve the relationship between:
+Original post
+→ Original comment
+→ Remix post
+
+Do not flatten the comment into an unidentifiable image if the platform can preserve the metadata.
+
+The rendered post can visually display the comment as a sticker, but internally store the original:
+commentId
+postId
+commentAuthorId
+remixAuthorId
+position
+scale
+rotation
+startTime
+endTime
+
+This allows Old Time to know exactly what was remixed.
+
+DISCOVERY:
+
+A remix should show a subtle “Remixed from @username” or equivalent attribution where appropriate.
+
+Do not make the attribution visually ugly or dominate the content.
+
+The original creator/commenter should receive the appropriate notification when their comment is remixed.
+
+QUALITY:
+
+The biggest requirement is visual quality.
+
+Do NOT make this look like a basic HTML div floating over a video.
+
+The comment card needs:
+
+* clean edges
+* proper anti-aliasing
+* correct scaling
+* consistent shadows
+* consistent corner radius
+* proper typography
+* no blurry text when resized
+* no jagged edges
+* no stretched avatar
+* no clipping
+* no weird padding changes
+
+Use vector/UI rendering for the comment instead of taking a low-resolution screenshot whenever possible.
+
+When the final video is exported/rendered, preserve the same visual quality shown in the editor.
+
+GESTURES:
+
+Implement proper mobile gesture handling:
+
+One finger:
+
+* move selected object
+
+Two fingers:
+
+* pinch = scale
+* rotate = rotation
+* drag = reposition
+
+Tap:
+
+* select object
+
+Long press:
+
+* show layer options
+
+Selected objects should show subtle editing handles/boundary feedback without making the final post look like an editor.
+
+LAYER SYSTEM:
+
+Create a real layer model for remix editing.
+
+Example:
+
+Video/Photo background
+↓
+Original comment layer
+↓
+User text layer
+↓
+Sticker layer
+↓
+Drawing layer
+
+Each layer should maintain its own transform and timing.
+
+Do NOT hard-code the comment to one position.
+
+STATUS SUPPORT:
+
+The same remix engine must work inside Status.
+
+If a user sees a comment and chooses:
+
+“Share to Status”
+
+the comment should open inside the Status editor as a movable/resizable sticker.
+
+They can then add their own text:
+
+“😂 I can’t believe y’all noticed this”
+
+and publish it as a Status.
+
+The status should preserve the source relationship so viewers can tap the comment/source and navigate back to the original content when permitted by privacy settings.
+
+PRIVACY:
+
+Respect the original post/comment’s visibility.
+
+If the original content is private, friends-only, close-friends-only, community-only, blocked, deleted, or otherwise restricted, do not expose content through the remix.
+
+If a source becomes unavailable later, handle the remix gracefully rather than displaying broken content.
+
+FINAL REQUIREMENT:
+
+This should feel like a completely native Old Time creative feature, not a copied TikTok UI.
+
+Think:
+
+TikTok comment reply
++
+Instagram/Snapchat story sticker behavior
++
+a real Photoshop-style layer canvas
++
+Old Time’s own visual identity.
+
+Build the underlying remix canvas as a reusable system so the exact same engine can eventually power comments, posts, statuses, community posts, and other remix features.
+
+Before finishing, test the entire flow on mobile:
+
+Comment → Remix → Record/upload → Move comment → Resize → Rotate → Add own text → Adjust timing → Preview → Publish → Open published remix → Tap source/comment → Return to original content.
+
+Fix every gesture, clipping, scaling, rendering, and positioning issue you find.

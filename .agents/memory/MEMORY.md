@@ -1,0 +1,24 @@
+- [Old Time product scope](old-time-scope.md) — Old Time is an Instagram clone; do not introduce music-focused features.
+- [Old Time creator and Blue Badge roadmap](old-time-creator-memberships.md) — creator earnings are deferred; Blue Badge uses Apple/Google IAP, and approved creators must maintain valid membership.
+- [Old Time public-facing copy](old-time-public-copy.md) — Do not expose internal migration or debugging notices in public screens.
+- [Old Time color direction](old-time-inbox.md) — White/light-gray ordinary screens; dark media navigation; regular story rings cyan/pink, Close Friends green, gold notifications.
+- [Old Time typography](old-time-typography.md) — Font and text-styling consistency covers every screen and overlay; it does not authorize copy or unrelated design changes.
+- [Old Time emojis](old-time-emojis.md) — Classic Apple/old WhatsApp look, consistent app-wide including chat; preserve the selection and all flags, with no skin-tone choices.
+- [Old Time Close Friends](old-time-close-friends.md) — Close Friends requires confirmed regular friendship; pending requests or following are not enough.
+- [Oldtime brand and entry](old-time-brand-entry.md) — Name is Oldtime; supplied brand/badge art, flat white Settings, red primary buttons, original selections/nav; no verification gate.
+- [Old Time social action icons](old-time-social-icons.md) — Keep Repost bold and Share a solid, curved right-pointing arrow matching the user's reference.
+- [Old Time navigation](old-time-navigation.md) — preserve bottom navigation except the requested Blast-for-Search replacement; keep the drawer additive.
+- [Old Time Blast](old-time-blast.md) — replace bottom Search only, keep Blast data device-local, and use softly rounded white monochrome surfaces.
+- [Old Time preview cache](old-time-preview-cache.md) — mobile `.replit.dev` can serve stale shell assets through the service worker; check its cache before changing UI.
+- [Old Time mockup preview ports](old-time-preview-ports.md) — keep the artifact proxy and Vite dev server on the same port to avoid stale canvas previews.
+- [Old Time Expo preview startup](old-time-expo-preview.md) — wait for the Expo bundle and session hydration before treating one blank capture as a route bug.
+- [Old Time cartoon artwork](old-time-cartoon-art.md) — Use the user's supplied character images in articles instead of generic replacement art.
+- [Old Time delivery order](old-time-delivery-order.md) — Finish the web app before building the mobile app from the finished product.
+- [Old Time real-time communications](old-time-realtime-architecture.md) — preserve direct calls; do not ship public Live without the user's full no-provider Rooms requirements.
+- [Oldtime AWS and portability](old-time-platform-independence.md) — AWS-first with intended Cognito auth; preserve features, inspect existing infrastructure, and avoid Replit runtime dependence.
+- [Oldtime asynchronous session isolation](oldtime-session-isolation.md) — Pin account-scoped work to its initiating session; recheck identity after every async boundary before mutating shared state.
+- [Old Time call UI](old-time-call-ui.md) — use the real profile photo and app palette; no Bitmoji, neon glow, or Old Time branding in call screens.
+- [Old Time audio and Remix](old-time-audio-remix.md) — audio-row-only entry points; movable layers and automatic cutout together; protect source privacy.
+- [Old Time browser media](old-time-browser-media.md) — test Chromium may lack MP4 codecs; MediaPipe’s CPU delegate can still require WebGL.
+- [Old Time creative canvas](old-time-comment-canvas.md) — one engine, Camera/Studio modes, manual full-screen capture; preserve approved editing and revocable comments.
+- [Old Time account tools](old-time-account-tools.md) — free Personal/Creator/Business types; Settings-only Creator Center and Blue Badge; separate dashboards and actual measured analytics.

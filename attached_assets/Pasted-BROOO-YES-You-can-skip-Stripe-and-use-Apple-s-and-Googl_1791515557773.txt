@@ -1,0 +1,184 @@
+BROOO 😭🔥 YES! You can skip Stripe and use Apple’s and Google’s payment systems instead. And honestly, for Oldtimehive, that could be a smart move.
+
+You want users to buy subscriptions, coins, send gifts, support creators, and unlock premium features. You can build that using the payment systems already available on iPhones and Android devices.
+
+Let me explain how I’d structure it for you.
+
+💳 1. Use Apple + Google instead of Stripe
+
+Feature	iPhone users 🍎	Android users 🤖
+Monthly subscriptions	Apple In-App Purchase	Google Play Billing
+Buy coins	Apple In-App Purchase	Google Play Billing
+Send virtual gifts	Coins purchased through Apple	Coins purchased through Google
+Creator subscriptions	Apple In-App Purchase	Google Play Billing
+Premium features	Apple In-App Purchase	Google Play Billing
+Payment processing	Apple handles checkout	Google handles checkout
+
+Both platforms support digital purchases and recurring subscriptions. For an app distributed through their respective stores, their billing systems are generally required for digital goods consumed inside the app, subject to applicable exceptions and regional rules.  
+
+The best part? You don’t need to build your own credit card checkout system.
+
+Users can pay with their existing Apple or Google payment methods.
+
+Official documentation:
+
+* Apple In-App Purchase⁠￼
+* Google Play Billing⁠￼
+
+💰 2. Bro, here’s how you can monetize Oldtimehive
+
+Let’s use the features you’ve been planning.
+
+A. Creator subscriptions
+
+Imagine a creator charges $4.99 per month for exclusive content.
+
+1. A user opens the creator’s profile.
+2. They tap Subscribe.
+3. Apple or Google processes the purchase.
+4. Oldtimehive verifies the subscription.
+5. The user unlocks the creator’s exclusive content.
+6. Your backend records the subscription and the creator’s earnings.
+
+Apple and Google may deduct applicable fees, and taxes, refunds, and other adjustments can affect the final amount.
+
+Important: If you want creators to receive a share of subscription revenue, you’ll need your own creator earnings and payout system. Apple and Google don’t automatically distribute subscription proceeds to every creator on your platform.
+
+B. Coins and virtual gifts
+
+This is where your idea gets interesting. 👀
+
+Imagine your coin shop looks like this:
+
+Coin package	Example price
+100 coins	$0.99
+550 coins	$4.99
+1,200 coins	$9.99
+6,500 coins	$49.99
+
+These are illustrative prices, not confirmed store pricing.
+
+The process would be:
+
+1. The user purchases coins through Apple or Google.
+2. Your backend verifies the transaction.
+3. Your system credits the user’s coin balance.
+4. The user sends gifts to creators during eligible interactions.
+5. Your backend records the gift and calculates the creator’s eligible earnings.
+
+You would need secure transaction verification, protection against duplicate credits, and a reliable ledger.
+
+Apple supports consumable in-app purchases, including virtual currencies, and Google Play Billing supports digital items such as virtual currency.  
+
+C. Your premium subscriptions
+
+Remember your creator verification and business plans?
+
+You could offer:
+
+* Creator verification: $2.99/month.
+* Business membership: $4.99/month.
+* Business annual membership: $29.99/year.
+
+Those are the prices you’ve been considering.
+
+You can implement eligible subscriptions using the respective store billing systems, with the exact product setup and eligibility depending on what each subscription provides.
+
+One thing to remember: paying for verification cannot mean automatically granting a verified badge without actually checking the account. Your backend should enforce the verification requirements separately from payment.
+
+⸻
+
+🏦 3. But bro, how do YOU get paid?
+
+This is the important part.
+
+Suppose users spend $10,000 on eligible in-app purchases.
+
+The money generally flows like this:
+
+Users → Apple/Google → Applicable fees and adjustments → Your developer proceeds
+
+Apple and Google pay your developer account according to their respective payment schedules and agreements. Your actual proceeds depend on applicable fees, refunds, taxes, and other adjustments.
+
+Then your own system handles creator earnings.
+
+For example:
+
+* Oldtimehive receives its proceeds from eligible purchases.
+* Your backend records the amount attributable to each creator.
+* You calculate each creator’s eligible share.
+* You maintain their earnings balance.
+* You arrange payouts through a suitable payout provider.
+
+Apple and Google handle the original purchase. They do not automatically handle your entire creator payout operation.
+
+You’ll need to consider payout verification, fraud prevention, tax reporting, and any legal requirements applicable to your business.
+
+⸻
+
+⚠️ 4. There’s one thing you need to understand about skipping Stripe
+
+Bro, there are actually two different payment problems.
+
+Problem 1: Collecting money from users.
+
+You can use Apple In-App Purchase and Google Play Billing for eligible digital purchases instead of Stripe.
+
+Problem 2: Paying creators their earnings.
+
+You still need a way to transfer money to creators’ bank accounts or other supported payout destinations.
+
+You might eventually use a provider specializing in marketplace payouts, even if you never use Stripe for checkout.
+
+You don’t necessarily need to build that payout infrastructure today.
+
+Also, since you’re developing Oldtimehive as a mobile-first web app, there’s an important distinction: Apple and Google billing aren’t automatically available to an ordinary website. You’ll need the appropriate native app integrations and store-compliant implementation when distributing through their app stores.
+
+If you later distribute a web version, its payment options will need to be evaluated separately.
+
+⸻
+
+🔥 5. Here’s the architecture I’d choose for Oldtimehive
+
+Since you’re building on AWS and want to move away from Replit, I’d organize the system like this:
+
+Component	Responsibility
+Oldtimehive frontend	Displays subscriptions, coin packages, gifts, and purchase status
+Apple StoreKit	Handles eligible iPhone purchases
+Google Play Billing	Handles eligible Android purchases
+AWS backend	Verifies transactions and processes purchase events
+PostgreSQL database	Stores balances, transactions, subscriptions, and creator earnings
+Creator payout system	Eventually transfers eligible earnings to creators
+
+The backend must be the authority for coin balances and creator earnings. Never trust the frontend alone to tell your server that someone paid.
+
+For subscriptions, use store notifications and server-side verification to keep access synchronized when a user renews, cancels, or receives a refund.
+
+One more thing about your web app
+
+You don’t have to stop building features just because the payment system isn’t ready.
+
+You can build the coin shop interface, creator subscription pages, gift animations, and earnings dashboard now. Keep actual purchases disabled or in test mode until the billing integrations are implemented.
+
+That way, you won’t have to redesign your whole app later.
+
+⸻
+
+🎯 My recommendation, bro
+
+Skip Stripe for mobile checkout. Use Apple + Google for digital purchases.
+
+You can postpone creator payouts until you’re ready to launch monetization.
+
+Here’s the order I’d follow:
+
+1. Finish building Oldtimehive.
+2. Migrate the project to your intended AWS infrastructure.
+3. Establish the database and backend transaction architecture.
+4. Integrate Apple and Google billing.
+5. Test subscriptions, coins, gifts, renewals, and refunds.
+6. Build the creator payout system before enabling cash withdrawals.
+
+One question, though, bro: Do you want Oldtimehive creators to be able to withdraw real money earned from gifts and subscriptions, like TikTok creators, or do you initially want coins and gifts to be an in-app experience without cash withdrawals?
+
+That decision changes how we should design your money system from the beginning.

@@ -1,0 +1,24 @@
+Update Oldtimehive to use my NEW AWS Cognito User Pool. The previous Cognito setup was replaced, so audit the existing authentication code and update all relevant configuration to match the new pool.
+
+NEW AWS COGNITO CONFIGURATION
+
+* AWS Region: us-east-2
+* User Pool ID: us-east-2_LIPojnZ2W
+* Current development callback URL: https://f39e9284-f551-4d3d-b774-795710340230-00-y7f27saism07.janeway.replit.dev/
+
+REQUIREMENTS:
+
+1. Search the entire project for the old Cognito User Pool ID, old Cognito domain, old app client IDs, and outdated authentication configuration.
+2. Update the app to use the new User Pool ID and region wherever required.
+3. Identify whether the web app uses Cognito User Pools directly, Cognito Managed Login, or OAuth authorization-code flow with PKCE. Preserve the existing architecture unless a change is necessary.
+4. Do not guess or invent the new Cognito app client ID or domain. Those must come from the new AWS Cognito configuration.
+5. Check the OAuth callback and sign-out URL handling. The development callback currently is:
+    https://f39e9284-f551-4d3d-b774-795710340230-00-y7f27saism07.janeway.replit.dev/
+    Ensure the application generates the exact callback URL expected by Cognito.
+6. Use environment variables or Replit Secrets for configuration. Do not hardcode AWS secrets or expose sensitive credentials in frontend code. Cognito public app client IDs are not secrets, but must still be correct.
+7. List every required environment variable and tell me exactly which values I still need to obtain from AWS, especially the new app client ID and Cognito domain.
+8. Test the login flow and report any remaining configuration errors. Do not claim authentication works unless it has actually been tested.
+9. Do not delete user data, create another user pool, change unrelated features, or rewrite the application.
+10. Keep the application portable so I can migrate away from Replit to AWS hosting later without having to rewrite authentication.
+
+First inspect the current code and report what needs to change. Then implement the minimal necessary changes and show me the exact remaining AWS setup steps.

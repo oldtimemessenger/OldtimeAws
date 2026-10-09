@@ -1,0 +1,60 @@
+We are changing our immediate priority: Oldtimehive needs to become revenue-ready as soon as possible without delaying the public launch.
+
+Do not rebuild the application. Continue from the existing implementation.
+
+PRIORITY 1: PREPARE BLUE BADGE MONETIZATION
+
+Make the Blue Badge membership our first monetization product.
+
+The planned pricing is:
+
+* $1.99 per month standard subscription.
+* Two-month free introductory trial for eligible users.
+* $0.99 per month promotional offer for eligible returning users.
+
+Keep all prices and promotional eligibility configurable.
+
+Implement the complete membership interface, benefit descriptions, subscription status, entitlement checks, purchase-pending states, errors, and membership restoration interface where supported.
+
+Do not simulate successful purchases or grant paid entitlements without verified transactions.
+
+PRIORITY 2: IDENTIFY THE FASTEST VALID PURCHASE ROUTE
+
+Inspect the current project architecture and determine whether the existing application is a browser-based web app, a native app, or a hybrid app.
+
+Report the actual implementation requirements for enabling subscriptions on iOS and Android.
+
+Use Apple and Google in-app purchases where required by their applicable policies. Do not add Stripe or a separate creator payout provider.
+
+If native store integration is not currently possible, keep the membership interface ready and identify exactly what must be completed before accepting purchases.
+
+Do not claim revenue can be collected until a real purchase flow has been implemented and tested.
+
+PRIORITY 3: FINISH THE DATABASE AND CREATOR SYSTEM
+
+Apply the required database migrations safely.
+
+Complete the creator eligibility engine for all supported content types, including original text, photos, videos, Stories, and meaningful community participation where those systems are available.
+
+Keep creator approval separate from paid membership.
+
+PRIORITY 4: LAUNCH SAFELY
+
+Do not hold up the social application while waiting for creator payouts, virtual gifts, or other future monetization systems.
+
+Finish the working social features, creator progression, Blue Badge membership presentation, announcement engine, and production database integration.
+
+PRIORITY 5: GIVE ME A CONCRETE REVENUE-READINESS REPORT
+
+Tell me:
+
+1. Which real purchase flow can be activated first.
+2. What accounts, store registrations, agreements, or configuration are still required.
+3. Which files and backend components must change.
+4. What can be launched immediately.
+5. What prevents users from actually paying today.
+6. The shortest implementation path to accepting the first legitimate subscription.
+
+Do not add Stripe, creator payouts, or unnecessary services.
+
+Focus on the fastest legitimate route to generating revenue while preserving the existing Oldtimehive application.

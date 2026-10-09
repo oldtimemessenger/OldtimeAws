@@ -1,0 +1,155 @@
+BROOOOO 😭🔥 NOW WE HAVE A PLAN!
+
+You’re building the website as the home of Oldtimehive, but Blue Badge purchases will happen exclusively inside the mobile apps. The website will direct users to download or open the app rather than selling subscriptions itself.
+
+That can work, bro. But there’s one important detail: Apple and Google have rules about directing users to external purchases, and those rules vary by storefront and region. We need to implement the redirect according to the rules applicable to each platform.
+
+💙 Here’s how Oldtimehive should work
+
+1. Someone visits Oldtimehive on the website
+
+They can:
+
+* Explore Oldtimehive.
+* Discover creators and communities.
+* Learn about Blue Badge.
+* See the membership benefits.
+* Download the mobile app.
+
+When they try to purchase Blue Badge, show this:
+
+BLUE BADGE 💙
+
+Your Oldtimehive experience, with more to discover.
+
+Unlock your Blue Badge membership, get early access to selected features, and enjoy premium benefits.
+
+Membership purchases are available in the Oldtimehive mobile app.
+
+[Download for iPhone]
+
+[Get it on Android]
+
+Already have Oldtimehive?
+
+[Open Oldtimehive]
+
+No website checkout. No Stripe subscription checkout. No confusion.
+
+2. They open the mobile app
+
+Inside the app:
+
+Profile → Blue Badge
+
+They see:
+
+* $1.99/month membership.
+* An eligible two-month free trial.
+* The membership benefits.
+* The applicable subscription terms.
+* The purchase button.
+
+They subscribe through the appropriate in-app purchase system.
+
+Once the purchase is verified, Oldtimehive activates their membership.
+
+3. They return to the website
+
+They sign in to their Oldtimehive account.
+
+The website checks their membership status and displays their Blue Badge where appropriate.
+
+If they don’t have an active membership, the website can show the benefits and an option to open or download the app.
+
+The website recognizes membership, but it never sells the subscription.
+
+⸻
+
+⚠️ One thing we need to get right
+
+Don’t assume every website-to-app purchase redirect is automatically permitted.
+
+For example, Apple’s rules for external purchase links differ depending on the storefront and applicable entitlements. Google also has specific requirements and exceptions governing external payment links.
+
+The safest initial design is to explain the membership on the website and provide ordinary app download links, without directing users to an external checkout.
+
+Your developer should verify the applicable policies before adding any purchase-specific redirects or external payment links.
+
+⸻
+
+🛠️ Bro, send your developer this
+
+OLDTIMEHIVE MEMBERSHIP ARCHITECTURE DECISION
+
+Blue Badge subscriptions will be sold exclusively through the Oldtimehive mobile applications. The website must not offer subscription checkout or collect Blue Badge payments.
+
+Please implement the following architecture.
+
+1. WEBSITE
+
+Keep the Blue Badge information page available on the website.
+
+Display the membership benefits and explain that subscriptions are available in the mobile app.
+
+Provide appropriate App Store and Google Play download buttons once the apps are published.
+
+If the app is already installed, support opening it through verified app links or universal links where available.
+
+If the app is not installed, direct the user to the appropriate app store.
+
+Do not add Stripe checkout, website subscription checkout, or external payment processing for Blue Badge.
+
+Do not add purchase-specific external payment links unless the applicable Apple and Google policies explicitly permit the proposed implementation.
+
+2. MOBILE APPLICATIONS
+
+Create the Blue Badge membership purchase experience inside the iOS and Android applications.
+
+Proposed pricing:
+
+* Standard subscription: $1.99 per month.
+* Introductory offer: two months free for eligible users.
+* Returning-user promotional offer: $0.99 per month for eligible users.
+
+Keep the prices and offer configurations flexible until the store products are created.
+
+Implement the appropriate native in-app purchase integrations before activating purchases.
+
+3. SHARED MEMBERSHIP STATUS
+
+Design the backend so verified membership entitlements can be recognized by the website and mobile apps.
+
+A user should not have to purchase the same membership twice simply because they use another supported platform.
+
+Verify purchases securely and handle renewals, expiration, cancellation, refunds, revocations, and restoration where applicable.
+
+Never trust browser local storage or client-submitted membership flags.
+
+4. CREATOR SYSTEM
+
+Keep creator eligibility separate from Blue Badge membership.
+
+Purchasing Blue Badge must not automatically approve a user for the Creator Program.
+
+5. LAUNCH REQUIREMENTS
+
+Do not pretend purchases are operational until the real store purchase flows are configured and tested.
+
+Report any remaining backend, database, app-link, store-registration, and native purchase integration requirements.
+
+Preserve the existing Oldtimehive website and current functionality.
+
+⸻
+
+💰 And here’s why I like this plan for you
+
+You maintain one Oldtimehive membership experience across the website and mobile apps, while keeping the website out of the subscription checkout business.
+
+Your first revenue product remains the $1.99 Blue Badge.
+
+Your creator program can grow alongside it, and you can introduce creator payouts later.
+
+One final recommendation: have your developer design the shared membership system now, but postpone the native purchase implementation until the mobile app architecture is ready. That avoids paying for the same integration twice.
+
+We’re building Oldtimehive to generate recurring revenue, bro, not turning the website into another project that delays the app. 💙

@@ -1,0 +1,58 @@
+Do a full visual audit of the entire Old Time app and fix the inconsistent background colors.
+
+Right now, some screens/sections use black while others use dark gray. I want the app’s PRIMARY BACKGROUND to be one consistent color throughout the entire application.
+
+Requirements:
+
+1. Identify the intended primary app background color from the existing design/theme and use that exact color consistently.
+2. Audit EVERY screen, page, modal, drawer, tab, navigation area, feed, profile, chat screen, settings screen, Rooms screen, community screen, and other UI surface.
+3. Find every place where the main background is accidentally using a different dark gray, black, inherited color, browser default, or hardcoded color.
+4. Replace those inconsistent PRIMARY BACKGROUND colors with the single approved app background color.
+5. Do NOT blindly make every surface the same color. Preserve intentional visual hierarchy for:
+    * Cards
+    * Posts
+    * Chat bubbles
+    * Input fields
+    * Bottom navigation
+    * Headers
+    * Modals
+    * Sheets
+    * Buttons
+    * Selected/active states
+    * Borders/dividers
+
+The goal is:
+
+PRIMARY APP BACKGROUND = ONE CONSISTENT COLOR
+
+while intentional elevated surfaces can still have their own slightly different colors.
+
+6. Check CSS variables/theme tokens first. If there is already a global background variable, make that the single source of truth instead of creating additional background colors.
+7. Remove duplicate or conflicting background declarations where appropriate.
+8. Check for:
+    * body background
+    * html background
+    * root/app container background
+    * page backgrounds
+    * screen wrappers
+    * fixed-position containers
+    * scroll containers
+    * mobile safe-area areas
+    * bottom navigation background
+    * modal/backdrop layers
+9. Make sure there are no visible flashes of a different color while navigating or scrolling.
+10. Test the app screen-by-screen on mobile dimensions after making the changes.
+
+IMPORTANT:
+
+Do not redesign the UI.
+
+Do not change the color palette.
+
+Do not randomly choose a new background color.
+
+Use the existing intended Old Time theme and make the PRIMARY BACKGROUND consistent everywhere.
+
+Before finishing, search the entire codebase for hardcoded background colors and identify any remaining ones. Only leave different colors where they are intentionally being used for an elevated UI surface or state.
+
+The final result should look visually unified: when moving from one screen to another, the main background should appear to be the exact same color everywhere.
